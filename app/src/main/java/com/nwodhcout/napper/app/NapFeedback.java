@@ -1,39 +1,38 @@
 package com.nwodhcout.napper.app;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
+
+import com.nwodhcout.napper.app.R;
 
 import java.util.Calendar;
 import java.util.Date;
 
-
-public class MainActivity extends ActionBarActivity {
+public class NapFeedback extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
+        setContentView(R.layout.activity_nap_feedback);
+        setFeedbackText();
     }
 
-
-
-    public void nap(View view){
-        Intent intent = new Intent(this, NapFeedback.class);
-        startActivity(intent);
+    private void setFeedbackText(){
+        TextView text = (TextView) findViewById(R.id.feedbackText);
+        Calendar c = Calendar.getInstance();
+        long timeInMillis = c.getTimeInMillis();
+        timeInMillis = timeInMillis + 20*60*1000;
+        Date date = new Date(timeInMillis);
+        text.setText(text.getText() + (date + ""));
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.nap_feedback, menu);
         return true;
     }
 
