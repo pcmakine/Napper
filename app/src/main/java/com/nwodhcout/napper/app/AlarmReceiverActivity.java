@@ -29,6 +29,7 @@ public class AlarmReceiverActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setWindowFlags();
         setContentView(R.layout.activity_alarm_receiver);
 
         Button stopAlarm = (Button) findViewById(R.id.stop);
@@ -40,6 +41,18 @@ public class AlarmReceiverActivity extends Activity {
         });
 
         playSound(this, getAlarmUri());
+    }
+
+    //http://stackoverflow.com/questions/11823259/using-flag-show-when-locked-with-disablekeyguard-in-secured-android-lock-scree
+    private void setWindowFlags(){
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN |
+                        WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN |
+                        WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
     }
 
     private void playSound(Context context, Uri alert) {
@@ -59,6 +72,7 @@ public class AlarmReceiverActivity extends Activity {
     }
 
     private void stopAlarmSound(){
+        WakeLocker.release();
         mMediaPlayer.stop();
         finish();
     }
@@ -80,9 +94,10 @@ public class AlarmReceiverActivity extends Activity {
     }
 
     @Override
-    public void onStop(){
-        super.onStop();
+    public void onBackPressed(){
+        super.onBackPressed();
         stopAlarmSound();
     }
+
 
 }

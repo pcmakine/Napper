@@ -3,6 +3,7 @@
     package="com.nwodhcout.napper.app" >
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
         android:allowBackup="true"
@@ -30,6 +31,10 @@
             android:name=".AlarmReceiverActivity"
             android:label="@string/title_activity_alarm_receiver" >
         </activity>
+        <receiver android:name="com.nwodhcout.napper.app.AlarmManagerBroadcastReceiver">
+        </receiver>
+        <service android:name="com.nwodhcout.napper.app.SimpleWakefulService" >
+        </service>
     </application>
 
 </manifest>

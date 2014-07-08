@@ -3,12 +3,15 @@ package com.nwodhcout.napper.app;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nwodhcout.napper.app.R;
 
@@ -16,14 +19,17 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class NapFeedback extends ActionBarActivity {
+    private AlarmManagerBroadcastReceiver alarm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nap_feedback);
+        alarm = new AlarmManagerBroadcastReceiver();
         setFeedbackText();
         setAlarm();
     }
+
 
     private void setFeedbackText(){
         TextView text = (TextView) findViewById(R.id.feedbackText);
@@ -35,16 +41,30 @@ public class NapFeedback extends ActionBarActivity {
     }
 
     private void setAlarm(){
-        Calendar cal = Calendar.getInstance();
+        Context context = this.getApplicationContext();
+        if(alarm != null){
+            alarm.setOnetimeTimer(context);
+        }else{
+            Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
+        }
+/*        Calendar cal = Calendar.getInstance();
         cal.add(Calendar.SECOND, 5);
         //Create a new PendingIntent and add it to the AlarmManager
         Intent intent = new Intent(this, AlarmReceiverActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                12345, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pendingIntent = PIntentManager.getPendingIntent(this, intent);
         AlarmManager am =
                 (AlarmManager)getSystemService(Activity.ALARM_SERVICE);
         am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
-                pendingIntent);
+                pendingIntent);*/
+    }
+
+    public void cancelAlarm(View view){
+        Context context = this.getApplicationContext();
+        if(alarm != null){
+            alarm.cancelAlarm(context);
+        }else{
+            Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
