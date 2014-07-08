@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nwodhcout.napper.app" >
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -23,6 +25,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nwodhcout.napper.app.MainActivity" />
+        </activity>
+        <activity
+            android:name=".AlarmReceiverActivity"
+            android:label="@string/title_activity_alarm_receiver" >
         </activity>
     </application>
 
