@@ -41,14 +41,17 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
     }
 
-    public void SetAlarm(Context context)
-    {
-        AlarmManager am=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+
+    public void setOnetimeTimerSeconds(Context context, int seconds){
+        AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
-        intent.putExtra(ONE_TIME, Boolean.FALSE);
+        intent.putExtra(ONE_TIME, Boolean.TRUE);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        //After after 5 seconds
-        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 5 , pi);
+        am.set(AlarmManager.RTC_WAKEUP, (System.currentTimeMillis() + 1000*seconds), pi);
+    }
+
+    public void setOnetimeTimerMinutes(Context context, int minutes){
+        this.setOnetimeTimerSeconds(context, minutes*60);
     }
 
     public void cancelAlarm(Context context)
@@ -58,13 +61,17 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(sender);
     }
-
-    public void setOnetimeTimer(Context context){
-        AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
-        intent.putExtra(ONE_TIME, Boolean.TRUE);
-        PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        am.set(AlarmManager.RTC_WAKEUP, (System.currentTimeMillis() + 1000*5), pi);
-    }
 }
+
+/**
+ *     public void SetAlarm(Context context)
+ {
+ AlarmManager am=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+ Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
+ intent.putExtra(ONE_TIME, Boolean.FALSE);
+ PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+ //After after 5 seconds
+ am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 5 , pi);
+ }
+ */
 

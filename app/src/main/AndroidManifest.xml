@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NapFeedback"
+            android:name=".NapFeedbackActivity"
             android:label="@string/title_activity_nap_feedback"
             android:parentActivityName=".MainActivity" >
             <meta-data

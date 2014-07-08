@@ -46,11 +46,9 @@ public class AlarmReceiverActivity extends Activity {
     //http://stackoverflow.com/questions/11823259/using-flag-show-when-locked-with-disablekeyguard-in-secured-android-lock-scree
     private void setWindowFlags(){
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN |
-                        WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
                         WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
                         WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN |
-                        WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
                         WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
                         WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
     }
