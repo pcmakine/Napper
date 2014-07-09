@@ -8,18 +8,81 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.nwodhcout.napper.app.MainActivity">
 
-    <Button
-        android:id="@+id/button"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Take a nap"
-        android:textSize = "40sp"
-        android:fontFamily="sans-serif-light"
-        android:textStyle="normal"
-        android:textColor = "#ffffff"
         android:layout_centerInParent="true"
-        android:background="@drawable/roundedbutton"
-        android:onClick="nap"
-        />
+        >
+
+        <Button
+            android:id="@+id/napButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Take a nap"
+            android:textSize = "40sp"
+            android:fontFamily="sans-serif-light"
+            android:textStyle="normal"
+            android:textColor = "@android:color/white"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/roundedbutton"
+            android:onClick="nap"
+            />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/napButton"
+            android:layout_alignParentRight="true"
+            >
+            <Button
+                android:id="@+id/customMin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Custom"
+                android:textSize = "30sp"
+                android:singleLine="true"
+                android:textColor = "#C2AAD2"
+                android:fontFamily="sans-serif-light"
+                android:layout_alignParentRight="true"
+                android:background="@android:color/transparent"
+                android:onClick="changeNapTime"
+                />
+            <Button
+                android:id="@+id/twentyMin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20"
+                android:textSize = "30sp"
+                android:fontFamily="sans-serif-light"
+                android:layout_alignParentLeft="true"
+                android:textColor = "#C2AAD2"
+                android:background="@android:color/transparent"
+                android:onClick="changeNapTime"
+                />
+            <Button
+                android:id="@+id/sixtyMin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="60"
+                android:textSize = "30sp"
+                android:fontFamily="sans-serif-light"
+                android:textColor = "#C2AAD2"
+                android:layout_centerHorizontal="true"
+                android:background="@android:color/transparent"
+                android:onClick="changeNapTime"
+                />
+
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/twentyMin"
+                android:progress = "20"
+                android:max = "100"
+                android:visibility = "invisible"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

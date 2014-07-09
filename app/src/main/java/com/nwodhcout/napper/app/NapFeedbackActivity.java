@@ -1,13 +1,12 @@
 package com.nwodhcout.napper.app;
 
 import android.content.Context;
-import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,15 +15,19 @@ import java.util.Date;
 
 public class NapFeedbackActivity extends ActionBarActivity {
     private AlarmManagerBroadcastReceiver alarm;
-    private static final int NAPTIME = 15; //naptime in seconds
+    private int napTime; //naptime in seconds
     private TimerUpdater updater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nap_feedback);
-        TextView timerText = (TextView) findViewById(R.id.timerText);
-        this.updater = new TimerUpdater(15, timerText);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            this.napTime = extras.getInt("NAP_TIME");
+        }
+        TextSwitcher timerText = (TextSwitcher) findViewById(R.id.timerText);
+        this.updater = new TimerUpdater(napTime, timerText, this);
 
         alarm = new AlarmManagerBroadcastReceiver();
         setAlarm();
@@ -52,8 +55,8 @@ public class NapFeedbackActivity extends ActionBarActivity {
         updater.setmStartTime(c.getTimeInMillis());
         Context context = this.getApplicationContext();
         if(alarm != null){
-            alarm.setOnetimeTimerSeconds(context, NAPTIME);
-            Common.debugTime(updater.getmStartTime() + NAPTIME*1000, "Alarmtime: ", "alarm set to: ");
+            alarm.setOnetimeTimerSeconds(context, napTime);
+            Common.debugTime(updater.getmStartTime() + napTime*1000, "Alarmtime: ", "alarm set to: ");
         }else{
             Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
         }
