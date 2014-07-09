@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/feedbackText"
-        android:text="Nap set for: "
+        android:text="@string/alarm_set_feedback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_below = "@id/timerText"
-            android:text = "cancel alarm"
+            android:text = "@string/cancel_alarm"
             android:onClick="cancelAlarm"/>
 
 

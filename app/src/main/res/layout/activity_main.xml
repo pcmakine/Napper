@@ -18,13 +18,13 @@
             android:id="@+id/napButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Take a nap"
             android:textSize = "40sp"
             android:fontFamily="sans-serif-light"
             android:textStyle="normal"
             android:textColor = "@android:color/white"
             android:layout_centerHorizontal="true"
             android:background="@drawable/roundedbutton"
+            android:text="@string/take_nap"
             android:onClick="nap"
             />
 
@@ -38,7 +38,7 @@
                 android:id="@+id/customMin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Custom"
+                android:text="@string/custom"
                 android:textSize = "30sp"
                 android:singleLine="true"
                 android:textColor = "#C2AAD2"

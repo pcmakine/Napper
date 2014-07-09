@@ -40,7 +40,6 @@ public class NapFeedbackActivity extends ActionBarActivity {
         updater.run();
     }
 
-
     private void setFeedbackText(){
         TextView text = (TextView) findViewById(R.id.feedbackText);
         Calendar c = Calendar.getInstance();

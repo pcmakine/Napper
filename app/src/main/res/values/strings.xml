@@ -7,4 +7,11 @@
     <string name="title_activity_nap_feedback">NapFeedback</string>
     <string name="title_activity_alarm_receiver">AlarmReceiverActivity</string>
 
+    <string name="take_nap">Take a Nap</string>
+    <string name="custom">Custom</string>
+    <string name="stop">Stop alarm</string>
+    <string name= "cancel_alarm">Cancel alarm</string>
+    <string name="alarm_set_feedback">Nap set for: </string>
+
+
 </resources>

@@ -62,7 +62,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void setDefaultTextToCustomButton(){
-        customTime.setText("custom");
+        customTime.setText(R.string.custom);
     }
 
     private void activateButton(Button btn){
