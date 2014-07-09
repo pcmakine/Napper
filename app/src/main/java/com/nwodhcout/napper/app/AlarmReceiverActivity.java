@@ -2,6 +2,7 @@ package com.nwodhcout.napper.app;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
@@ -41,6 +42,7 @@ public class AlarmReceiverActivity extends Activity {
         stopAlarm.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View arg0, MotionEvent arg1) {
                 stopAlarmSound();
+                goToMainActivity();
                 return false;
             }
         });
@@ -77,7 +79,6 @@ public class AlarmReceiverActivity extends Activity {
     private void stopAlarmSound(){
         WakeLocker.release();
         mMediaPlayer.stop();
-        finish();
     }
 
     //Get an alarm sound. Try for an alarm. If none set, try notification,
@@ -96,10 +97,16 @@ public class AlarmReceiverActivity extends Activity {
         return alert;
     }
 
+    private void goToMainActivity(){
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
     @Override
     public void onBackPressed(){
         super.onBackPressed();
         stopAlarmSound();
+        this.goToMainActivity();
     }
 
 

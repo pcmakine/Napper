@@ -24,4 +24,12 @@ public class Common {
         dbgStrng.append(time);
         Log.d("Alarmtime: ", dbgStrng.toString());
     }
+
+    public static int msToSec(long ms){
+        return (int) (ms/1000);
+    }
+
+    public static long secondsToMs(int secs){
+        return secs*1000;
+    }
 }

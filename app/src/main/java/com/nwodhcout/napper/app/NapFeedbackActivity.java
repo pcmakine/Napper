@@ -1,6 +1,7 @@
 package com.nwodhcout.napper.app;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,14 +17,24 @@ import java.util.Date;
 public class NapFeedbackActivity extends ActionBarActivity {
     private AlarmManagerBroadcastReceiver alarm;
     private static final int NAPTIME = 15; //naptime in seconds
+    private TimerUpdater updater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nap_feedback);
+        TextView timerText = (TextView) findViewById(R.id.timerText);
+        this.updater = new TimerUpdater(15, timerText);
+
         alarm = new AlarmManagerBroadcastReceiver();
-        setFeedbackText();
         setAlarm();
+        startTimerUpdates();
+        setFeedbackText();
+    }
+
+    private void startTimerUpdates(){
+        updater.cancel();
+        updater.run();
     }
 
 
@@ -31,17 +42,18 @@ public class NapFeedbackActivity extends ActionBarActivity {
         TextView text = (TextView) findViewById(R.id.feedbackText);
         Calendar c = Calendar.getInstance();
         long timeInMillis = c.getTimeInMillis();
-        timeInMillis = timeInMillis + 20*60*1000;
+        timeInMillis = timeInMillis + Common.secondsToMs(updater.getNapTime());
         Date date = new Date(timeInMillis);
         text.setText(text.getText() + (date + ""));
     }
 
     private void setAlarm(){
+        Calendar c = Calendar.getInstance();
+        updater.setmStartTime(c.getTimeInMillis());
         Context context = this.getApplicationContext();
         if(alarm != null){
             alarm.setOnetimeTimerSeconds(context, NAPTIME);
-            Calendar c = Calendar.getInstance();
-            Common.debugTime(c.getTimeInMillis() + NAPTIME*1000, "Alarmtime: ", "alarm set to: ");
+            Common.debugTime(updater.getmStartTime() + NAPTIME*1000, "Alarmtime: ", "alarm set to: ");
         }else{
             Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
         }
@@ -54,6 +66,7 @@ public class NapFeedbackActivity extends ActionBarActivity {
         }else{
             Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
         }
+        this.onBackPressed();
     }
 
     @Override
@@ -74,4 +87,18 @@ public class NapFeedbackActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        updater.cancel();
+        if(alarm != null) {     //cancel the alarm if back button is pressed
+            /**
+             * todo don't cancel the alarm, instead show an indicator in
+             * the main screen showing that the alarm is on
+             */
+            alarm.cancelAlarm(this.getApplicationContext());
+            Toast.makeText(this, "Alarm cancelled", Toast.LENGTH_SHORT).show();
+        }
+        }
 }

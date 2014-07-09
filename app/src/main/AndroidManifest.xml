@@ -29,7 +29,7 @@
         </activity>
         <activity
             android:name=".AlarmReceiverActivity"
-            android:label="@string/title_activity_alarm_receiver" >
+            android:label="@string/title_activity_alarm_receiver">
         </activity>
         <receiver android:name="com.nwodhcout.napper.app.AlarmManagerBroadcastReceiver">
         </receiver>
