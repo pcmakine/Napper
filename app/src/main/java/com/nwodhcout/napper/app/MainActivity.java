@@ -2,6 +2,7 @@ package com.nwodhcout.napper.app;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,7 +20,7 @@ public class MainActivity extends ActionBarActivity {
     private int napTime;
     private Button customTime;
     private Button activatedButton;
-    private SeekBar seekBar;
+    private MySeekBar seekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class MainActivity extends ActionBarActivity {
         this.napTime = DEFAULTNAPTIME;
         setContentView(R.layout.activity_main);
         this.customTime = (Button) findViewById(R.id.customMin);
-        this.seekBar = (SeekBar) findViewById(R.id.seekBar);
+        this.seekBar = (MySeekBar) findViewById(R.id.seekBar);
 
         setSeekBarListener();
         activateButton((Button) findViewById(R.id.twentyMin));
@@ -74,6 +75,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void setSeekBarListener(){
+        seekBar.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+        seekBar.getSeekBarThumb().setColorFilter(Color.LTGRAY, PorterDuff.Mode.SRC_IN);
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

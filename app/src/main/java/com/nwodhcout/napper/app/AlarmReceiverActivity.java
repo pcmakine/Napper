@@ -42,7 +42,7 @@ public class AlarmReceiverActivity extends Activity {
         stopAlarm.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View arg0, MotionEvent arg1) {
                 stopAlarmSound();
-                goToMainActivity();
+                onBackPressed();
                 return false;
             }
         });
@@ -97,16 +97,10 @@ public class AlarmReceiverActivity extends Activity {
         return alert;
     }
 
-    private void goToMainActivity(){
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
-    }
-
     @Override
     public void onBackPressed(){
         super.onBackPressed();
         stopAlarmSound();
-        this.goToMainActivity();
     }
 
 

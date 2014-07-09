@@ -73,13 +73,13 @@
                 />
 
 
-            <SeekBar
+            <com.nwodhcout.napper.app.MySeekBar
                 android:id="@+id/seekBar"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/twentyMin"
-                android:progress = "20"
-                android:max = "100"
+                android:progress = "3605"
+                android:max = "10000"
                 android:visibility = "invisible"
                 />
         </RelativeLayout>

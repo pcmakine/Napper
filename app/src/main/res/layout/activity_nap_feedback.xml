@@ -19,24 +19,87 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
 
-        <TextSwitcher
-            android:id="@+id/timerText"
+        <LinearLayout
+            android:id="@+id/timeWrapper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:inAnimation="@anim/push_up_in"
-            android:outAnimation="@anim/push_up_out"
-            />
+            >
+            <TextSwitcher
+                android:id="@+id/hoursTens"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inAnimation="@anim/push_up_in"
+                android:outAnimation="@anim/push_up_out"
+                />
+
+            <TextSwitcher
+                android:id="@+id/hoursOnes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/hoursTens"
+                android:inAnimation="@anim/push_up_in"
+                android:outAnimation="@anim/push_up_out"
+                />
+            <TextView
+                android:id="@+id/hourMinSeparator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:text = ":"
+                />
+
+            <TextSwitcher
+                android:id="@+id/minutesTens"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/hourMinSeparator"
+                android:inAnimation="@anim/push_up_in"
+                android:outAnimation="@anim/push_up_out"
+                />
+            <TextSwitcher
+                android:id="@+id/minutesOnes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/minutesTens"
+                android:inAnimation="@anim/push_up_in"
+                android:outAnimation="@anim/push_up_out"
+                />
+            <TextView
+                android:id="@+id/minSecSeparator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:text = ":"
+                />
+            <TextSwitcher
+                android:id="@+id/secondsTens"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/minSecSeparator"
+                android:inAnimation="@anim/push_up_in"
+                android:outAnimation="@anim/push_up_out"
+                />
+            <TextSwitcher
+                android:id="@+id/secondsOnes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/secondsTens"
+                android:inAnimation="@anim/push_up_in"
+                android:outAnimation="@anim/push_up_out"
+                />
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_below = "@id/timerText"
+            android:layout_below = "@id/timeWrapper"
             android:text = "@string/cancel_alarm"
+            android:textSize = "30sp"
             android:onClick="cancelAlarm"/>
-
 
     </RelativeLayout>
 

@@ -26,8 +26,7 @@ public class NapFeedbackActivity extends ActionBarActivity {
         if (extras != null) {
             this.napTime = extras.getInt("NAP_TIME");
         }
-        TextSwitcher timerText = (TextSwitcher) findViewById(R.id.timerText);
-        this.updater = new TimerUpdater(napTime, timerText, this);
+        this.updater = new TimerUpdater(napTime, this);
 
         alarm = new AlarmManagerBroadcastReceiver();
         setAlarm();
