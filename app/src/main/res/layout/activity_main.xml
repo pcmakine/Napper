@@ -9,6 +9,7 @@
     tools:context="com.nwodhcout.napper.app.MainActivity">
 
     <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Take a nap"
@@ -16,7 +17,6 @@
         android:fontFamily="sans-serif-light"
         android:textStyle="normal"
         android:textColor = "#ffffff"
-        android:id="@+id/button"
         android:layout_centerInParent="true"
         android:background="@drawable/roundedbutton"
         android:onClick="nap"

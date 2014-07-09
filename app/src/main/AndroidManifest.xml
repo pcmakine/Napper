@@ -33,8 +33,6 @@
         </activity>
         <receiver android:name="com.nwodhcout.napper.app.AlarmManagerBroadcastReceiver">
         </receiver>
-        <service android:name="com.nwodhcout.napper.app.SimpleWakefulService" >
-        </service>
     </application>
 
 </manifest>

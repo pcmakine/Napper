@@ -8,6 +8,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import com.nwodhcout.napper.app.R;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 public class AlarmReceiverActivity extends Activity {
     private MediaPlayer mMediaPlayer;
@@ -26,6 +28,9 @@ public class AlarmReceiverActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Calendar c = Calendar.getInstance();
+        Common.debugTime(c.getTimeInMillis(), "Alarmtime: ", "alarm receiver activity started at: ");
+
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);

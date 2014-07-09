@@ -30,10 +30,9 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
             //Make sure this intent has been sent by the one-time timer button.
             msgStr.append("One time Timer : ");
         }
-        Format formatter = new SimpleDateFormat("hh:mm:ss a");
-        msgStr.append(formatter.format(new Date()));
+        msgStr.append(Common.getSimpleDate(System.currentTimeMillis()));
 
-        Toast.makeText(context, msgStr, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, msgStr, Toast.LENGTH_SHORT).show();
         Intent i = new Intent(context, AlarmReceiverActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);

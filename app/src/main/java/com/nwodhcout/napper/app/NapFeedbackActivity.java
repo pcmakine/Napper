@@ -3,6 +3,7 @@ package com.nwodhcout.napper.app;
 import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +15,7 @@ import java.util.Date;
 
 public class NapFeedbackActivity extends ActionBarActivity {
     private AlarmManagerBroadcastReceiver alarm;
+    private static final int NAPTIME = 15; //naptime in seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,9 @@ public class NapFeedbackActivity extends ActionBarActivity {
     private void setAlarm(){
         Context context = this.getApplicationContext();
         if(alarm != null){
-            alarm.setOnetimeTimerSeconds(context, 5);
+            alarm.setOnetimeTimerSeconds(context, NAPTIME);
+            Calendar c = Calendar.getInstance();
+            Common.debugTime(c.getTimeInMillis() + NAPTIME*1000, "Alarmtime: ", "alarm set to: ");
         }else{
             Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
         }
