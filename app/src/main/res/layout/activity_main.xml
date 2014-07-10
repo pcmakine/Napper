@@ -18,12 +18,12 @@
             android:id="@+id/napButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize = "40sp"
+            android:textSize = "20sp"
             android:fontFamily="sans-serif-light"
             android:textStyle="normal"
             android:textColor="#864C9E"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/roundedbutton"
+            android:background="@drawable/buttonbg"
             android:text="@string/take_nap"
             android:onClick="nap"
             />
@@ -78,8 +78,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/twentyMin"
-                android:progress = "3605"
-                android:max = "10000"
+                android:progress = "20"
+                android:max = "120"
                 android:visibility = "invisible"
                 />
         </RelativeLayout>

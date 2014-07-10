@@ -6,15 +6,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.nwodhcout.napper.app.animatedtimer.TimerUpdater;
 
 import java.util.Calendar;
 import java.util.Date;
 
 public class NapFeedbackActivity extends ActionBarActivity {
-    private AlarmManagerBroadcastReceiver alarm;
+    private AlarmManager alarm;
     private int napTime; //naptime in seconds
     private TimerUpdater updater;
 
@@ -28,7 +29,7 @@ public class NapFeedbackActivity extends ActionBarActivity {
         }
         this.updater = new TimerUpdater(napTime, this);
 
-        alarm = new AlarmManagerBroadcastReceiver();
+        alarm = new AlarmManager();
         setAlarm();
         startTimerUpdates();
         setFeedbackText();
@@ -101,5 +102,5 @@ public class NapFeedbackActivity extends ActionBarActivity {
             alarm.cancelAlarm(this.getApplicationContext());
             Toast.makeText(this, "Alarm cancelled", Toast.LENGTH_SHORT).show();
         }
-        }
+    }
 }

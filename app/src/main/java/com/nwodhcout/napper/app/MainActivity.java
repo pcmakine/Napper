@@ -12,7 +12,13 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-
+/**todo 10.7: refactor time extractor out of timerupdater. Give out a hashmap of keys like hoursOnes --> 1
+ * and so on. Also make setcurrent time method and make the class remember the current and old seconds
+ * then the class can just be asked whether the timeswitchers need to be updated
+ *
+ * save the alarm time in shared preferences for example so that when the user comes back to the app he
+ * is directed right away to the feedback screen
+*/
 public class MainActivity extends ActionBarActivity {
     private static final int DEFAULTNAPTIME = 20; //min
     private static final int ACTIVATEDCOLOR = Color.rgb(134, 76, 158);

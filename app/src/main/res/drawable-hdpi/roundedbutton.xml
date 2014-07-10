@@ -18,40 +18,19 @@
         android:height="250dp"/>
 
     />-->
-
-    <item>
-        <shape android:shape="oval" >
-            <solid android:color="#FF0033" />
-        </shape>
-
+    <item android:left="1dp" android:top="1dp">
+        <scale android:drawable="@drawable/circle" android:scaleGravity="top|left" />
     </item>
-
-    <item>
-    <shape
-        android:innerRadiusRatio="3"
-        android:shape="ring"
-        android:thicknessRatio="8"
-        android:useLevel="false" >
-        <solid android:color="#ffffff" />
-        <size
-            android:height="250dip"
-            android:width="250dip" />
-    </shape>
-</item>
     <item>
         <shape
-            android:innerRadiusRatio="3"
-            android:shape="ring"
-            android:thicknessRatio="30"
-            android:useLevel="false" >
+            android:shape="oval" >
             <solid android:color="#864C9E" />
+            <size
+                android:height="100dip"
+                android:width="100dip" />
 
         </shape>
     </item>
-
-
-
-
 
 
 

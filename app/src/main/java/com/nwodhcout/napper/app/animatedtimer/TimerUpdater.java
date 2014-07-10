@@ -1,4 +1,4 @@
-package com.nwodhcout.napper.app;
+package com.nwodhcout.napper.app.animatedtimer;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,8 +9,11 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import com.nwodhcout.napper.app.R;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
