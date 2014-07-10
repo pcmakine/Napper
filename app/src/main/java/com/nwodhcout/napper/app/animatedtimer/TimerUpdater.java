@@ -14,7 +14,6 @@ import com.nwodhcout.napper.app.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -33,7 +32,6 @@ public class TimerUpdater implements Runnable {
         currentVals = new ArrayList();
         setUpSwitchers(activity);
         this.mHandler = new Handler();
-
     }
 
     private void setUpSwitchers(Activity activity){
@@ -44,29 +42,32 @@ public class TimerUpdater implements Runnable {
         switchers.add((TextSwitcher) activity.findViewById(R.id.hoursOnes));
         switchers.add((TextSwitcher) activity.findViewById(R.id.hoursTens));
         this.prepareAnimation(activity);
-
-
     }
 
     public void initSwitchers(){
-        final long start = mStartTime;
-        long elapseTime = System.currentTimeMillis() - start;
-        Log.d("elapsedtime", elapseTime / 1000 + " ELAPSED");
-        Log.d("elapsedtime", napTime + " NAPTIME");
-        int totalSeconds = napTime - (int) (elapseTime/1000);
-        Log.d("elapsedtime", totalSeconds + " TIMETOSHOW");
+        int secsLeft = timeLeft();
 
-        int hours = totalSeconds / 3600;
-        int minutes = (totalSeconds - (hours * 3600)) / 60;
-        int seconds = totalSeconds - (hours* 3600 + minutes * 60);
+        int hours = secsLeft / 3600;
+        int minutes = (secsLeft - (hours * 3600)) / 60;
+        int seconds = secsLeft - (hours* 3600 + minutes * 60);
 
-        int onesSecs = seconds%10;
-        int tensSecs = (int) seconds/10;
-        int onesMins = minutes%10;
-        int tensMins = (int) minutes/10;
-        int onesHours = hours%10;
-        int tensHours = (int) hours/10;
-        updateSwitchers(Arrays.asList(onesSecs, tensSecs, onesMins, tensMins, onesHours, tensHours), true);
+        updateSwitchers(Arrays.asList(secondDigit(seconds), firstDigit(seconds),
+                secondDigit(minutes), firstDigit(minutes),
+                secondDigit(hours), firstDigit(hours)), true);
+    }
+
+    private int timeLeft(){
+        long elapseTime = System.currentTimeMillis() - mStartTime;
+        int secondsLeft = napTime - (int) (elapseTime/1000);
+        return secondsLeft;
+    }
+
+    private int firstDigit(int val){
+        return (int) (val/10);
+    }
+
+    private int secondDigit(int val){
+        return val%10;
     }
 
     private void prepareAnimation(final Context ctx){
@@ -106,8 +107,7 @@ public class TimerUpdater implements Runnable {
     }
 
     public void run() {
-        final long start = mStartTime;
-        long elapseTime = System.currentTimeMillis() - start;
+        long elapseTime = System.currentTimeMillis() - mStartTime;
         Log.d("elapsedtime", elapseTime / 1000 + " ELAPSED");
         Log.d("elapsedtime", napTime + " NAPTIME");
         int totalSeconds = napTime - (int) (elapseTime/1000);
@@ -117,21 +117,16 @@ public class TimerUpdater implements Runnable {
         int minutes = (totalSeconds - (hours * 3600)) / 60;
         int seconds = totalSeconds - (hours* 3600 + minutes * 60);
 
-        int onesSecs = seconds%10;
-        int tensSecs = (int) seconds/10;
-        int onesMins = minutes%10;
-        int tensMins = (int) minutes/10;
-        int onesHours = hours%10;
-        int tensHours = (int) hours/10;
-
-        Log.d("onesTens: ", "totalseconds: " + totalSeconds);
+/*        Log.d("onesTens: ", "totalseconds: " + totalSeconds);
         Log.d("onestens: ", "onesHours: " + onesHours);
         Log.d("onestens: ", "tensHours: " + onesHours);
         Log.d("onestens: ", "onesSecs: " + onesSecs);
-        Log.d("onestens: ", "tensSecs: " + tensSecs);
+        Log.d("onestens: ", "tensSecs: " + tensSecs);*/
 
 
-        updateSwitchers(Arrays.asList(onesSecs, tensSecs, onesMins, tensMins, onesHours, tensHours), false);
+        updateSwitchers(Arrays.asList(secondDigit(seconds), firstDigit(seconds),
+                secondDigit(minutes), firstDigit(minutes),
+                secondDigit(hours), firstDigit(hours)), true);
         // updateMins(minutes);
         // updateSecs(seconds);
 

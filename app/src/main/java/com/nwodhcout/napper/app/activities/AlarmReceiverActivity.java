@@ -1,30 +1,31 @@
-package com.nwodhcout.napper.app;
+package com.nwodhcout.napper.app.activities;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.nwodhcout.napper.app.AlarmManager;
+import com.nwodhcout.napper.app.Common;
 import com.nwodhcout.napper.app.R;
+import com.nwodhcout.napper.app.WakeLocker;
 
 import java.io.IOException;
 import java.util.Calendar;
 
 public class AlarmReceiverActivity extends Activity {
     private MediaPlayer mMediaPlayer;
+    private static final int ALARMEXPIRATION = 120; // seconds
+    private CountDownTimer timer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,12 +42,25 @@ public class AlarmReceiverActivity extends Activity {
         Button stopAlarm = (Button) findViewById(R.id.stop);
         stopAlarm.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View arg0, MotionEvent arg1) {
-                stopAlarmSound();
+                releaseMediaPlayer();
                 onBackPressed();
                 return false;
             }
         });
         playSound(this, getAlarmUri());
+        setAlarmExpiration();
+    }
+
+    private void setAlarmExpiration(){
+        timer = new CountDownTimer(Common.secondsToMs(ALARMEXPIRATION), Common.secondsToMs(ALARMEXPIRATION)) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
+            @Override
+            public void onFinish() {
+                onBackPressed();
+            }
+        }.start();
     }
 
     //http://stackoverflow.com/questions/11823259/using-flag-show-when-locked-with-disablekeyguard-in-secured-android-lock-scree
@@ -61,13 +75,19 @@ public class AlarmReceiverActivity extends Activity {
 
     private void playSound(Context context, Uri alert) {
         mMediaPlayer = new MediaPlayer();
+        mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mMediaPlayer.start();
+            }
+        });
         try {
             mMediaPlayer.setDataSource(context, alert);
             final AudioManager audioManager = (AudioManager) context
                     .getSystemService(Context.AUDIO_SERVICE);
             if (audioManager.getStreamVolume(AudioManager.STREAM_ALARM) != 0) {
                 mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
-                mMediaPlayer.prepare();
+                mMediaPlayer.prepareAsync();
                 mMediaPlayer.start();
             }
         } catch (IOException e) {
@@ -75,9 +95,12 @@ public class AlarmReceiverActivity extends Activity {
         }
     }
 
-    private void stopAlarmSound(){
-        WakeLocker.release();
-        mMediaPlayer.stop();
+    private void releaseMediaPlayer(){
+        if(mMediaPlayer != null){
+            mMediaPlayer.stop();
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+        }
     }
 
     //Get an alarm sound. Try for an alarm. If none set, try notification,
@@ -97,10 +120,20 @@ public class AlarmReceiverActivity extends Activity {
     }
 
     @Override
+    public void onStop(){
+        super.onStop();
+        releaseMediaPlayer();
+    }
+
+    @Override
     public void onBackPressed(){
         super.onBackPressed();
-        stopAlarmSound();
+        releaseMediaPlayer();
         AlarmManager.removeAlarmFromFile(this);
+        if(timer != null){
+            timer.cancel();
+        }
+        WakeLocker.release();
     }
 
 

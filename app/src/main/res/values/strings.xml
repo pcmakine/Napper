@@ -11,9 +11,11 @@
     <string name="napping">Napping...</string>
     <string name="custom">Custom</string>
     <string name="stop">Stop alarm</string>
-    <string name= "cancel_alarm">Cancel alarm</string>
+    <string name= "cancel_alarm">Cancel Alarm</string>
     <string name="alarm_set_feedback">Nap set for: </string>
     <string name="alarm_notification">An alarm has been set. Click to view details. </string>
+    <string name= "alarm_cancelled">alarm cancelled</string>
+
 
 
 </resources>

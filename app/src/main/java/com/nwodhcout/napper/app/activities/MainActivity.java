@@ -1,5 +1,6 @@
-package com.nwodhcout.napper.app;
+package com.nwodhcout.napper.app.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -13,10 +14,15 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends ActionBarActivity {
+import com.nwodhcout.napper.app.Alarm;
+import com.nwodhcout.napper.app.AlarmManager;
+import com.nwodhcout.napper.app.Common;
+import com.nwodhcout.napper.app.MySeekBar;
+import com.nwodhcout.napper.app.R;
+
+public class MainActivity extends Activity {
     private static final int DEFAULTNAPTIME = 20; //min
     private static final int ACTIVATEDCOLOR = Color.rgb(134, 76, 158);
     private static final int DEACTIVATEDCOLOR = Color.rgb(194, 170, 210);
@@ -48,7 +54,7 @@ public class MainActivity extends ActionBarActivity {
         int elapsedSecs = (int) (Common.msToSec(System.currentTimeMillis() - alarm.getStartTime()));
         int napLeft = (int) alarm.getNapTime() - elapsedSecs;
         intent.putExtra("NAP_TIME", napLeft);
-        intent.putExtra("NAP_START", alarm.getStartTime());
+        intent.putExtra("NAP_START", System.currentTimeMillis());
         startActivity(intent);
     }
 

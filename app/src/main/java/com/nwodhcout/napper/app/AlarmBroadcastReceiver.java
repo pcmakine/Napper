@@ -1,12 +1,12 @@
 package com.nwodhcout.napper.app;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import com.nwodhcout.napper.app.activities.AlarmReceiverActivity;
 
 /**
  * Created by Pete on 8.7.2014.

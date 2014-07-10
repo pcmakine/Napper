@@ -1,4 +1,4 @@
-package com.nwodhcout.napper.app;
+package com.nwodhcout.napper.app.activities;
 
 import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nwodhcout.napper.app.AlarmManager;
+import com.nwodhcout.napper.app.R;
 import com.nwodhcout.napper.app.animatedtimer.TimerUpdater;
 
 import java.util.Calendar;
@@ -76,13 +78,13 @@ public class NapFeedbackActivity extends ActionBarActivity {
     public void onBackPressed(){
         super.onBackPressed();
         updater.cancel();
-        if(alarm != null) {     //cancel the alarm if back button is pressed
-            /**
+/*        if(alarm != null) {     //cancel the alarm if back button is pressed
+            *//**
              * todo don't cancel the alarm, instead show an indicator in
              * the main screen showing that the alarm is on
-             */
-            alarm.cancelAlarm(this.getApplicationContext());
-            Toast.makeText(this, "Alarm cancelled", Toast.LENGTH_SHORT).show();
-        }
+             *//*
+*//*            alarm.cancelAlarm(this.getApplicationContext());
+            Toast.makeText(this, "Alarm cancelled", Toast.LENGTH_SHORT).show();*//*
+        }*/
     }
 }
