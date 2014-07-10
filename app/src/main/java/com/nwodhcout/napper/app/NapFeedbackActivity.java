@@ -36,23 +36,12 @@ public class NapFeedbackActivity extends ActionBarActivity {
         updater.initSwitchers();
 
         startTimerUpdates();
-        setFeedbackText();
     }
 
     private void startTimerUpdates(){
         updater.cancel();
         updater.run();
     }
-
-    private void setFeedbackText(){
-        TextView text = (TextView) findViewById(R.id.feedbackText);
-        Calendar c = Calendar.getInstance();
-        long timeInMillis = c.getTimeInMillis();
-        timeInMillis = timeInMillis + Common.secondsToMs(updater.getNapTime());
-        Date date = new Date(timeInMillis);
-        text.setText(text.getText() + (date + ""));
-    }
-
 
     public void cancelAlarm(View view){
         Context context = this.getApplicationContext();

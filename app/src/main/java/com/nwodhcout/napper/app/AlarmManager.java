@@ -17,7 +17,13 @@ public class AlarmManager {
         Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
         intent.putExtra(ONE_TIME, Boolean.TRUE);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        am.set(android.app.AlarmManager.RTC_WAKEUP, (System.currentTimeMillis() + 1000*alarm.getNapTime()), pi);
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        if(currentapiVersion >= 19){
+            am.setExact(android.app.AlarmManager.RTC_WAKEUP, (System.currentTimeMillis() + 1000*alarm.getNapTime()), pi);
+        }else{
+            am.set(android.app.AlarmManager.RTC_WAKEUP, (System.currentTimeMillis() + 1000*alarm.getNapTime()), pi);
+        }
+
         saveAlarm(context, alarm);
     }
 

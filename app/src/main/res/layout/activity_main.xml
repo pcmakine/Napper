@@ -6,6 +6,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/background_opacity"
     tools:context="com.nwodhcout.napper.app.MainActivity">
     <Button
         android:id="@+id/alarmNotification"
@@ -18,6 +19,7 @@
         />
 
     <RelativeLayout
+        android:id="@+id/napButtonWrapper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -33,65 +35,65 @@
             android:textColor="#864C9E"
             android:layout_centerHorizontal="true"
             android:background="@drawable/buttonbg"
+
             android:text="@string/take_nap"
             android:onClick="nap"
             />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/napButtonWrapper"
+        android:layout_alignParentRight="true"
+        >
+        <Button
+            android:id="@+id/customMin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/custom"
+            android:textSize = "25sp"
+            android:singleLine="true"
+            android:textColor = "#C2AAD2"
+            android:fontFamily="sans-serif-light"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:onClick="changeNapTime"
+            />
+        <Button
+            android:id="@+id/twentyMin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20"
+            android:textSize = "25sp"
+            android:fontFamily="sans-serif-light"
+            android:layout_alignParentLeft="true"
+            android:textColor = "#C2AAD2"
+            android:background="@android:color/transparent"
+            android:onClick="changeNapTime"
+            />
+        <Button
+            android:id="@+id/sixtyMin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="60"
+            android:textSize = "25sp"
+            android:fontFamily="sans-serif-light"
+            android:textColor = "#C2AAD2"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent"
+            android:onClick="changeNapTime"
+            />
 
-        <RelativeLayout
+
+        <com.nwodhcout.napper.app.MySeekBar
+            android:id="@+id/seekBar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/napButton"
-            android:layout_alignParentRight="true"
-            >
-            <Button
-                android:id="@+id/customMin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/custom"
-                android:textSize = "30sp"
-                android:singleLine="true"
-                android:textColor = "#C2AAD2"
-                android:fontFamily="sans-serif-light"
-                android:layout_alignParentRight="true"
-                android:background="@android:color/transparent"
-                android:onClick="changeNapTime"
-                />
-            <Button
-                android:id="@+id/twentyMin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="20"
-                android:textSize = "30sp"
-                android:fontFamily="sans-serif-light"
-                android:layout_alignParentLeft="true"
-                android:textColor = "#C2AAD2"
-                android:background="@android:color/transparent"
-                android:onClick="changeNapTime"
-                />
-            <Button
-                android:id="@+id/sixtyMin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="60"
-                android:textSize = "30sp"
-                android:fontFamily="sans-serif-light"
-                android:textColor = "#C2AAD2"
-                android:layout_centerHorizontal="true"
-                android:background="@android:color/transparent"
-                android:onClick="changeNapTime"
-                />
-
-
-            <com.nwodhcout.napper.app.MySeekBar
-                android:id="@+id/seekBar"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/twentyMin"
-                android:progress = "20"
-                android:max = "120"
-                android:visibility = "invisible"
-                />
-        </RelativeLayout>
+            android:layout_below="@id/twentyMin"
+            android:progress = "20"
+            android:max = "120"
+            android:visibility = "invisible"
+            />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -2,6 +2,7 @@ package com.nwodhcout.napper.app.animatedtimer;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -78,7 +79,8 @@ public class TimerUpdater implements Runnable {
                     @Override
                     public View makeView() {
                         TextView myText = new TextView(ctx);
-                        myText.setTextSize(36);
+                        myText.setTextSize(25);
+                        myText.setTextColor(Color.rgb(255, 255, 255));
                         return myText;
                     }
                 });
