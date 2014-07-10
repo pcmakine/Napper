@@ -24,13 +24,17 @@ public class NapFeedbackActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nap_feedback);
         Bundle extras = getIntent().getExtras();
+        long startTime = -1;
+
         if (extras != null) {
             this.napTime = extras.getInt("NAP_TIME");
+            startTime = extras.getLong("NAP_START");
         }
+        this.alarm = new AlarmManager();
         this.updater = new TimerUpdater(napTime, this);
+        updater.setmStartTime(startTime);
+        updater.initSwitchers();
 
-        alarm = new AlarmManager();
-        setAlarm();
         startTimerUpdates();
         setFeedbackText();
     }
@@ -49,18 +53,6 @@ public class NapFeedbackActivity extends ActionBarActivity {
         text.setText(text.getText() + (date + ""));
     }
 
-    private void setAlarm(){
-        Calendar c = Calendar.getInstance();
-        long startTime = c.getTimeInMillis();
-        updater.setmStartTime(startTime);
-        Context context = this.getApplicationContext();
-        if(alarm != null){
-            alarm.setOnetimeTimerSeconds(context, napTime, startTime);
-            Common.debugTime(updater.getmStartTime() + napTime*1000, "Alarmtime: ", "alarm set to: ");
-        }else{
-            Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     public void cancelAlarm(View view){
         Context context = this.getApplicationContext();

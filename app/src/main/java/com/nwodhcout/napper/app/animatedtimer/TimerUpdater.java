@@ -44,6 +44,28 @@ public class TimerUpdater implements Runnable {
         switchers.add((TextSwitcher) activity.findViewById(R.id.hoursTens));
         this.prepareAnimation(activity);
 
+
+    }
+
+    public void initSwitchers(){
+        final long start = mStartTime;
+        long elapseTime = System.currentTimeMillis() - start;
+        Log.d("elapsedtime", elapseTime / 1000 + " ELAPSED");
+        Log.d("elapsedtime", napTime + " NAPTIME");
+        int totalSeconds = napTime - (int) (elapseTime/1000);
+        Log.d("elapsedtime", totalSeconds + " TIMETOSHOW");
+
+        int hours = totalSeconds / 3600;
+        int minutes = (totalSeconds - (hours * 3600)) / 60;
+        int seconds = totalSeconds - (hours* 3600 + minutes * 60);
+
+        int onesSecs = seconds%10;
+        int tensSecs = (int) seconds/10;
+        int onesMins = minutes%10;
+        int tensMins = (int) minutes/10;
+        int onesHours = hours%10;
+        int tensHours = (int) hours/10;
+        updateSwitchers(Arrays.asList(onesSecs, tensSecs, onesMins, tensMins, onesHours, tensHours), true);
     }
 
     private void prepareAnimation(final Context ctx){
@@ -107,7 +129,7 @@ public class TimerUpdater implements Runnable {
         Log.d("onestens: ", "tensSecs: " + tensSecs);
 
 
-        updateSwitchers(Arrays.asList(onesSecs, tensSecs, onesMins, tensMins, onesHours, tensHours));
+        updateSwitchers(Arrays.asList(onesSecs, tensSecs, onesMins, tensMins, onesHours, tensHours), false);
         // updateMins(minutes);
         // updateSecs(seconds);
 
@@ -121,15 +143,18 @@ public class TimerUpdater implements Runnable {
         }
     }
 
-    private void updateSwitchers(List<Integer> newVals){
+    private void updateSwitchers(List<Integer> newVals, boolean noDelay){
         for (int i = 0; i< switchers.size(); i++){
-            updateSwitcher(switchers.get(i), currentVals.get(i), newVals.get(i));
+            updateSwitcher(switchers.get(i), currentVals.get(i), newVals.get(i), noDelay);
             currentVals.set(i, newVals.get(i));
         }
     }
 
-    private void updateSwitcher(TextSwitcher switcher, int currentVal, int val){
-        if(currentVal != val){
+    private void updateSwitcher(TextSwitcher switcher, int currentVal, int val, boolean noDelay){
+        if(noDelay){
+            switcher.setCurrentText("" + val);
+        }
+        else if(currentVal != val){
             switcher.setText("" + val);
         }
     }

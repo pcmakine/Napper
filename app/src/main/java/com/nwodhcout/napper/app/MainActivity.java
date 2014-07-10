@@ -1,5 +1,6 @@
 package com.nwodhcout.napper.app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -8,17 +9,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-/**todo 10.7: refactor time extractor out of timerupdater. Give out a hashmap of keys like hoursOnes --> 1
- * and so on. Also make setcurrent time method and make the class remember the current and old seconds
- * then the class can just be asked whether the timeswitchers need to be updated
- *
- * save the alarm time in shared preferences for example so that when the user comes back to the app he
- * is directed right away to the feedback screen
-*/
 public class MainActivity extends ActionBarActivity {
     private static final int DEFAULTNAPTIME = 20; //min
     private static final int ACTIVATEDCOLOR = Color.rgb(134, 76, 158);
@@ -27,6 +24,8 @@ public class MainActivity extends ActionBarActivity {
     private Button customTime;
     private Button activatedButton;
     private MySeekBar seekBar;
+    private Alarm alarm;
+    private AlarmManager alarmManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +34,45 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         this.customTime = (Button) findViewById(R.id.customMin);
         this.seekBar = (MySeekBar) findViewById(R.id.seekBar);
+        this.alarmManager = new AlarmManager();
 
+        Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.twinkle);
+        Button btn = (Button) findViewById(R.id.alarmNotification);
+        btn.startAnimation(myFadeInAnimation);
         setSeekBarListener();
         activateButton((Button) findViewById(R.id.twentyMin));
     }
 
+    public void showOngoingAlarm(View view){
+        Intent intent = new Intent(this, NapFeedbackActivity.class);
+        int elapsedSecs = (int) (Common.msToSec(System.currentTimeMillis() - alarm.getStartTime()));
+        int napLeft = (int) alarm.getNapTime() - elapsedSecs;
+        intent.putExtra("NAP_TIME", napLeft);
+        intent.putExtra("NAP_START", alarm.getStartTime());
+        startActivity(intent);
+    }
+
     public void nap(View view){
         Intent intent = new Intent(this, NapFeedbackActivity.class);
+        if(alarm != null){
+            alarmManager.cancelAlarm(this);
+        }
+        long startTime = System.currentTimeMillis();
+        Alarm al = new Alarm(startTime, napTime);
+        setAlarm(al);
         intent.putExtra("NAP_TIME", napTime);
+        intent.putExtra("NAP_START", startTime);
         startActivity(intent);
+    }
+
+
+    private void setAlarm(Alarm al){
+        Context context = this.getApplicationContext();
+        if(alarmManager != null){
+            alarmManager.setOnetimeTimerSeconds(context, al);
+        }else{
+            Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void changeNapTime(View view){
@@ -103,6 +132,19 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        alarm = AlarmManager.retrieveAlarm(this);
+        Button btn = (Button) findViewById(R.id.alarmNotification);
+        if(alarm != null){
+            btn.setVisibility(View.VISIBLE);
+            btn.setText(R.string.alarm_notification);
+        }else{
+            btn.setVisibility(View.INVISIBLE);
+            btn.setText("");
+        }
+    }
 
     @Override
     public void onBackPressed(){

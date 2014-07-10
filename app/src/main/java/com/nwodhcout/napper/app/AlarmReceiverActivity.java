@@ -46,7 +46,6 @@ public class AlarmReceiverActivity extends Activity {
                 return false;
             }
         });
-
         playSound(this, getAlarmUri());
     }
 
@@ -101,6 +100,7 @@ public class AlarmReceiverActivity extends Activity {
     public void onBackPressed(){
         super.onBackPressed();
         stopAlarmSound();
+        AlarmManager.removeAlarmFromFile(this);
     }
 
 
