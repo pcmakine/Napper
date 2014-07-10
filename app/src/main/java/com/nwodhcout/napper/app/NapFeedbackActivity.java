@@ -51,10 +51,11 @@ public class NapFeedbackActivity extends ActionBarActivity {
 
     private void setAlarm(){
         Calendar c = Calendar.getInstance();
-        updater.setmStartTime(c.getTimeInMillis());
+        long startTime = c.getTimeInMillis();
+        updater.setmStartTime(startTime);
         Context context = this.getApplicationContext();
         if(alarm != null){
-            alarm.setOnetimeTimerSeconds(context, napTime);
+            alarm.setOnetimeTimerSeconds(context, napTime, startTime);
             Common.debugTime(updater.getmStartTime() + napTime*1000, "Alarmtime: ", "alarm set to: ");
         }else{
             Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();

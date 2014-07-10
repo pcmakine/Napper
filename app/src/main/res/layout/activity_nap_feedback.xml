@@ -31,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:inAnimation="@anim/push_up_in"
                 android:outAnimation="@anim/push_up_out"
+                android:text = "0"
                 />
 
             <TextSwitcher
@@ -40,13 +41,14 @@
                 android:layout_toRightOf="@id/hoursTens"
                 android:inAnimation="@anim/push_up_in"
                 android:outAnimation="@anim/push_up_out"
+                android:text = "0"
                 />
             <TextView
                 android:id="@+id/hourMinSeparator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30sp"
-                android:text = ":"
+                android:text = ""
                 />
 
             <TextSwitcher
@@ -56,6 +58,7 @@
                 android:layout_toRightOf="@id/hourMinSeparator"
                 android:inAnimation="@anim/push_up_in"
                 android:outAnimation="@anim/push_up_out"
+                android:text = "0"
                 />
             <TextSwitcher
                 android:id="@+id/minutesOnes"
@@ -64,13 +67,14 @@
                 android:layout_toRightOf="@id/minutesTens"
                 android:inAnimation="@anim/push_up_in"
                 android:outAnimation="@anim/push_up_out"
+                android:text = "0"
                 />
             <TextView
                 android:id="@+id/minSecSeparator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30sp"
-                android:text = ":"
+                android:text = ""
                 />
             <TextSwitcher
                 android:id="@+id/secondsTens"
@@ -79,6 +83,7 @@
                 android:layout_toRightOf="@id/minSecSeparator"
                 android:inAnimation="@anim/push_up_in"
                 android:outAnimation="@anim/push_up_out"
+                android:text = "0"
                 />
             <TextSwitcher
                 android:id="@+id/secondsOnes"
@@ -87,6 +92,7 @@
                 android:layout_toRightOf="@id/secondsTens"
                 android:inAnimation="@anim/push_up_in"
                 android:outAnimation="@anim/push_up_out"
+                android:text = "0"
                 />
 
         </LinearLayout>

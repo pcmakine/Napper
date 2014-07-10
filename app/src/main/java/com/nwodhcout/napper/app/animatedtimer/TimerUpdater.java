@@ -32,6 +32,7 @@ public class TimerUpdater implements Runnable {
         currentVals = new ArrayList();
         setUpSwitchers(activity);
         this.mHandler = new Handler();
+
     }
 
     private void setUpSwitchers(Activity activity){
@@ -42,6 +43,7 @@ public class TimerUpdater implements Runnable {
         switchers.add((TextSwitcher) activity.findViewById(R.id.hoursOnes));
         switchers.add((TextSwitcher) activity.findViewById(R.id.hoursTens));
         this.prepareAnimation(activity);
+
     }
 
     private void prepareAnimation(final Context ctx){
