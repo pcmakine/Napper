@@ -8,6 +8,7 @@
     <string name="title_activity_alarm_receiver">AlarmReceiverActivity</string>
 
     <string name="take_nap">Take a Nap</string>
+    <string name="napping">Napping...</string>
     <string name="custom">Custom</string>
     <string name="stop">Stop alarm</string>
     <string name= "cancel_alarm">Cancel alarm</string>
