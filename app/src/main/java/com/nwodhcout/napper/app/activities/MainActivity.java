@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,7 +27,7 @@ import com.nwodhcout.napper.app.R;
 public class MainActivity extends Activity {
     private static final int DEFAULTNAPTIME = 20; //min
     private static final int ACTIVATEDCOLOR = Color.rgb(134, 76, 158);
-    private static final int DEACTIVATEDCOLOR = Color.rgb(194, 170, 210);
+    private static final int DEACTIVATEDCOLOR = Color.WHITE;
     private int napTime;
     private Button customTime;
     private Button activatedButton;
@@ -64,9 +66,10 @@ public class MainActivity extends Activity {
             alarmManager.cancelAlarm(this);
         }
         long startTime = System.currentTimeMillis();
-        Alarm al = new Alarm(startTime, napTime);
+        int napSecs = napTime;
+        Alarm al = new Alarm(startTime, napSecs);
         setAlarm(al);
-        intent.putExtra("NAP_TIME", napTime);
+        intent.putExtra("NAP_TIME", napSecs);
         intent.putExtra("NAP_START", startTime);
         startActivity(intent);
     }
@@ -116,8 +119,8 @@ public class MainActivity extends Activity {
     }
 
     private void setSeekBarListener(){
-        seekBar.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
-        seekBar.getSeekBarThumb().setColorFilter(Color.LTGRAY, PorterDuff.Mode.SRC_IN);
+        seekBar.getProgressDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        seekBar.getSeekBarThumb().setColorFilter(ACTIVATEDCOLOR, PorterDuff.Mode.SRC_IN);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -125,12 +128,9 @@ public class MainActivity extends Activity {
                 napTime = seekBar.getProgress();
                 customTime.setText(napTime + "");
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 

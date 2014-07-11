@@ -85,12 +85,12 @@
             android:onClick="changeNapTime"
             />
 
-
         <com.nwodhcout.napper.app.MySeekBar
             android:id="@+id/seekBar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/twentyMin"
+            android:secondaryProgress="120"
             android:progress = "20"
             android:max = "120"
             android:visibility = "invisible"

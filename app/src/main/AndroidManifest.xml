@@ -23,11 +23,7 @@
         <activity
             android:name=".activities.NapFeedbackActivity"
             android:label="@string/title_activity_nap_feedback"
-            android:noHistory="true"
-            android:parentActivityName=".activities.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.nwodhcout.napper.app.MainActivity" />
+            android:noHistory="true">
         </activity>
         <activity
             android:name=".activities.AlarmReceiverActivity"

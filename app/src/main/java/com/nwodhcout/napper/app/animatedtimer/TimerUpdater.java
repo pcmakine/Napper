@@ -126,7 +126,7 @@ public class TimerUpdater implements Runnable {
 
         updateSwitchers(Arrays.asList(secondDigit(seconds), firstDigit(seconds),
                 secondDigit(minutes), firstDigit(minutes),
-                secondDigit(hours), firstDigit(hours)), true);
+                secondDigit(hours), firstDigit(hours)), false);
         // updateMins(minutes);
         // updateSecs(seconds);
 

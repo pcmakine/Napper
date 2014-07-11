@@ -123,6 +123,7 @@ public class AlarmReceiverActivity extends Activity {
     public void onStop(){
         super.onStop();
         releaseMediaPlayer();
+        WakeLocker.release();
     }
 
     @Override
