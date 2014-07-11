@@ -11,8 +11,77 @@
     <Button
         android:id="@+id/stop"
         android:layout_centerInParent="true"
-        android:text="@string/stop"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonbg"/>
 
+
+
+
+    <RelativeLayout
+        android:id="@+id/napIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <LinearLayout
+            android:orientation = "vertical"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_centerInParent="true">
+
+
+            <TextView
+                android:id="@+id/nappingText"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:textSize = "30sp"
+                android:fontFamily="sans-serif-light"
+                android:textStyle="normal"
+                android:textColor="#864C9E"
+                android:text= "@string/alarm_stop"
+                />
+
+            <TextView
+                android:id="@+id/hourMinSeparator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textColor="@android:color/white"
+                android:text = "@string/alarm_tap"
+                />
+
+            <View
+                android:layout_marginTop="25dp"
+                android:id="@+id/rectangle"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background= "@drawable/rectangle"/>
+
+
+            <LinearLayout
+                android:id="@+id/timeWrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal"
+                >
+                <TextSwitcher
+                    android:id="@+id/hoursTens"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inAnimation="@anim/push_up_in"
+                    android:outAnimation="@anim/push_up_out"
+                    android:text = "0"
+                    />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>
