@@ -12,6 +12,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import com.nwodhcout.napper.app.AlarmManager;
@@ -49,6 +51,13 @@ public class AlarmReceiverActivity extends Activity {
         });
         playSound(this, getAlarmUri());
         setAlarmExpiration();
+        setAnimation();
+    }
+
+    private void setAnimation(){
+        final Animation animationScale = AnimationUtils.loadAnimation(this, R.anim.scale);
+        Button stopBtn = (Button) findViewById(R.id.stop);
+        stopBtn.startAnimation(animationScale);
     }
 
     private void setAlarmExpiration(){
@@ -136,6 +145,4 @@ public class AlarmReceiverActivity extends Activity {
         }
         WakeLocker.release();
     }
-
-
 }
