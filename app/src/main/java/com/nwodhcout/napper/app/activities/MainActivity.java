@@ -25,6 +25,7 @@ public class MainActivity extends Activity {
     private static final int DEFAULTNAPTIME = 20; //min
     private static final int ACTIVATEDCOLOR = Color.rgb(134, 76, 158);
     private static final int DEACTIVATEDCOLOR = Color.WHITE;
+    private Button[] buttons;
     private int napTime;
     private Button customTime;
     private Button activatedButton;
@@ -40,10 +41,14 @@ public class MainActivity extends Activity {
         this.customTime = (Button) findViewById(R.id.customMin);
         this.seekBar = (MySeekBar) findViewById(R.id.seekBar);
         this.alarmManager = new AlarmManager();
+        buttons = new Button[3];
+        buttons[0] = (Button) findViewById(R.id.twentyMin);
+        buttons[1] = (Button) findViewById(R.id.sixtyMin);
+        buttons[2] = (Button) findViewById(R.id.customMin);
+
         setAnimation();
 
         setSeekBarListener();
-        activateButton((Button) findViewById(R.id.twentyMin));
     }
 
     private void setAnimation(){
@@ -96,12 +101,10 @@ public class MainActivity extends Activity {
             case R.id.twentyMin:
                 this.napTime = 20;
                 seekBar.setVisibility(View.INVISIBLE);
-                setDefaultTextToCustomButton();
                 break;
             case R.id.sixtyMin:
                 this.napTime = 60;
                 seekBar.setVisibility(View.INVISIBLE);
-                setDefaultTextToCustomButton();
                 break;
             case R.id.customMin:
                 this.napTime = seekBar.getProgress();
@@ -116,11 +119,18 @@ public class MainActivity extends Activity {
     }
 
     private void activateButton(Button btn){
+        for (int i = 0; i < buttons.length; i++){
+            buttons[i].setTextColor(DEACTIVATEDCOLOR);
+        }
         btn.setTextColor(ACTIVATEDCOLOR);
-        if(activatedButton != null && activatedButton != btn){
+        if(btn != (Button) findViewById(R.id.customMin)){
+            setDefaultTextToCustomButton();
+        }
+
+/*        if(activatedButton != null && activatedButton != btn){
             activatedButton.setTextColor(DEACTIVATEDCOLOR);
         }
-        this.activatedButton = btn;
+        this.activatedButton = btn;*/
     }
 
     private void setSeekBarListener(){
@@ -155,6 +165,7 @@ public class MainActivity extends Activity {
             btn.setVisibility(View.INVISIBLE);
             btn.setText("");
         }
+        activateButton((Button) findViewById(R.id.twentyMin));
     }
 
     @Override
