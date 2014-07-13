@@ -2,12 +2,14 @@ package com.nwodhcout.napper.app.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.PowerManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -15,6 +17,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.nwodhcout.napper.app.AlarmManager;
 import com.nwodhcout.napper.app.Common;
@@ -52,6 +55,7 @@ public class AlarmReceiverActivity extends Activity {
         playSound(this, getAlarmUri());
         setAlarmExpiration();
         setAnimation();
+
     }
 
     private void setAnimation(){
@@ -131,18 +135,26 @@ public class AlarmReceiverActivity extends Activity {
     @Override
     public void onStop(){
         super.onStop();
-        releaseMediaPlayer();
-        WakeLocker.release();
+        PowerManager powermanager = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
+        if (powermanager.isScreenOn()){
+            cleanUp();
+            finish();
+        }
+
     }
 
-    @Override
-    public void onBackPressed(){
-        super.onBackPressed();
+    private void cleanUp(){
         releaseMediaPlayer();
         AlarmManager.removeAlarmFromFile(this);
         if(timer != null){
             timer.cancel();
         }
         WakeLocker.release();
+    }
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        cleanUp();
     }
 }

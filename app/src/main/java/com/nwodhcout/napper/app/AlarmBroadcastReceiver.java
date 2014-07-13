@@ -27,7 +27,7 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
         }
         msgStr.append(Common.getSimpleDate(System.currentTimeMillis()));
 
-        Toast.makeText(context, msgStr, Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(context, msgStr, Toast.LENGTH_SHORT).show();
         Intent i = new Intent(context, AlarmReceiverActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
