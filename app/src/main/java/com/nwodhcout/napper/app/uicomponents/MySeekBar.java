@@ -1,4 +1,4 @@
-package com.nwodhcout.napper.app;
+package com.nwodhcout.napper.app.uicomponents;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -21,13 +21,16 @@ public class MySeekBar extends SeekBar {
         super(context, attrs, defStyle);
     }
 
+    public Drawable getSeekBarThumb() {
+        return mThumb;
+    }
+
     @Override
     public void setThumb(Drawable thumb) {
         super.setThumb(thumb);
         mThumb = thumb;
+
     }
-    public Drawable getSeekBarThumb() {
-        return mThumb;
-    }
+
 
 }

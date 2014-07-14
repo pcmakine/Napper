@@ -8,7 +8,7 @@ import android.content.SharedPreferences;
 /**
  * Created by Pete on 10.7.2014.
  */
-public class AlarmManager {
+public class NapAlarmManager {
     final public static String ONE_TIME = "onetime";
 
     public void setOnetimeTimerSeconds(Context context, Alarm alarm){

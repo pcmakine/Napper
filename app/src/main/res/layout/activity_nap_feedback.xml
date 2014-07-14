@@ -1,12 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.nwodhcout.napper.app.activities.NapFeedbackActivity"
+    style = "@style/rootLayout"
+    tools:context="com.nwodhcout.napper.app.activities.NapCounterActivity"
     android:background="@drawable/background_opacity2">
 
 
@@ -25,12 +20,9 @@
 
             <TextView
                 android:id="@+id/nappingText"
+                style = "@style/bigText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize = "30sp"
-                android:fontFamily="sans-serif-light"
-                android:textStyle="normal"
-                android:textColor="#864C9E"
                 android:text= "@string/napping"
                 />
 
@@ -43,69 +35,43 @@
                 >
                 <TextSwitcher
                     android:id="@+id/hoursTens"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inAnimation="@anim/push_up_in"
-                    android:outAnimation="@anim/push_up_out"
-                    android:text = "0"
+                    style = "@style/textSwitcher"
                     />
 
                 <TextSwitcher
                     android:id="@+id/hoursOnes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inAnimation="@anim/push_up_in"
-                    android:outAnimation="@anim/push_up_out"
-                    android:text = "0"
+                    style = "@style/textSwitcher"
                     />
                 <TextView
                     android:id="@+id/hourMinSeparator"
+                    style = "@style/mediumText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
-                    android:textColor="@android:color/white"
                     android:text = ":"
                     />
 
                 <TextSwitcher
                     android:id="@+id/minutesTens"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inAnimation="@anim/push_up_in"
-                    android:outAnimation="@anim/push_up_out"
-                    android:text = "0"
+                    style = "@style/textSwitcher"
                     />
                 <TextSwitcher
                     android:id="@+id/minutesOnes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inAnimation="@anim/push_up_in"
-                    android:outAnimation="@anim/push_up_out"
-                    android:text = "0"
+                    style = "@style/textSwitcher"
                     />
                 <TextView
                     android:id="@+id/minSecSeparator"
+                    style = "@style/mediumText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
-                    android:textColor="@android:color/white"
                     android:text = ":"
                     />
                 <TextSwitcher
                     android:id="@+id/secondsTens"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inAnimation="@anim/push_up_in"
-                    android:outAnimation="@anim/push_up_out"
-                    android:text = "0"
+                    style = "@style/textSwitcher"
                     />
                 <TextSwitcher
                     android:id="@+id/secondsOnes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inAnimation="@anim/push_up_in"
-                    android:outAnimation="@anim/push_up_out"
-                    android:text = "0"
+                    style = "@style/textSwitcher"
                     />
 
             </LinearLayout>
@@ -114,14 +80,9 @@
     </RelativeLayout>
     <Button
         android:id="@+id/cancelButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style = "@style/bottomButton"
         android:layout_centerHorizontal="true"
         android:text = "@string/cancel_alarm"
-        android:textSize = "25sp"
-        android:fontFamily="sans-serif-light"
-        android:background="@android:color/transparent"
-        android:textColor="#ffffff"
         android:layout_below="@id/napIndicator"
         android:onClick="cancelAlarm"/>
 </RelativeLayout>

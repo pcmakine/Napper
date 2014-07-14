@@ -1,10 +1,8 @@
-package com.nwodhcout.napper.app.animatedtimer;
+package com.nwodhcout.napper.app.uicomponents;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
@@ -19,14 +17,14 @@ import java.util.List;
 /**
  * Created by Pete on 9.7.2014.
  */
-public class TimerUpdater implements Runnable {
+public class AnimatedCountDown implements Runnable {
     private long mStartTime;
     private int napTime;
     private Handler mHandler;
     private ArrayList<TextSwitcher> switchers;
     private ArrayList<Integer> currentVals;
 
-    public TimerUpdater(int napTime, Activity activity){
+    public AnimatedCountDown(int napTime, Activity activity){
         this.napTime = napTime;
         switchers = new ArrayList();
         currentVals = new ArrayList();
@@ -44,7 +42,8 @@ public class TimerUpdater implements Runnable {
         this.prepareAnimation(activity);
     }
 
-    public void initSwitchers(){
+    public void start(long startTime){
+        this.mStartTime = startTime;
         int secsLeft = timeLeft();
 
         int hours = secsLeft / 3600;
@@ -80,18 +79,13 @@ public class TimerUpdater implements Runnable {
                     @Override
                     public View makeView() {
                         TextView myText = new TextView(ctx);
-                        myText.setTextSize(25);
-                        myText.setTextColor(Color.rgb(255, 255, 255));
+                        myText.setTextAppearance(ctx, R.style.mediumText);
                         return myText;
                     }
                 });
             }
         }
 
-    }
-
-    public void setmStartTime(long startTime){
-        this.mStartTime = startTime;
     }
 
     public long getmStartTime(){
@@ -108,27 +102,15 @@ public class TimerUpdater implements Runnable {
 
     public void run() {
         long elapseTime = System.currentTimeMillis() - mStartTime;
-        Log.d("elapsedtime", elapseTime / 1000 + " ELAPSED");
-        Log.d("elapsedtime", napTime + " NAPTIME");
         int totalSeconds = napTime - (int) (elapseTime/1000);
-        Log.d("elapsedtime", totalSeconds + " TIMETOSHOW");
 
         int hours = totalSeconds / 3600;
         int minutes = (totalSeconds - (hours * 3600)) / 60;
         int seconds = totalSeconds - (hours* 3600 + minutes * 60);
 
-/*        Log.d("onesTens: ", "totalseconds: " + totalSeconds);
-        Log.d("onestens: ", "onesHours: " + onesHours);
-        Log.d("onestens: ", "tensHours: " + onesHours);
-        Log.d("onestens: ", "onesSecs: " + onesSecs);
-        Log.d("onestens: ", "tensSecs: " + tensSecs);*/
-
-
         updateSwitchers(Arrays.asList(secondDigit(seconds), firstDigit(seconds),
                 secondDigit(minutes), firstDigit(minutes),
                 secondDigit(hours), firstDigit(hours)), false);
-        // updateMins(minutes);
-        // updateSecs(seconds);
 
         // add a delay to adjust for computation time
         long delay = (1000 - (elapseTime%1000));

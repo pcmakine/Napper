@@ -4,9 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
-import com.nwodhcout.napper.app.activities.AlarmReceiverActivity;
+import com.nwodhcout.napper.app.activities.AlarmActivity;
 
 /**
  * Created by Pete on 8.7.2014.
@@ -16,7 +15,6 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        WakeLocker.acquire(context);
         //You can do the processing here.
         Bundle extras = intent.getExtras();
         StringBuilder msgStr = new StringBuilder();
@@ -28,7 +26,7 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
         msgStr.append(Common.getSimpleDate(System.currentTimeMillis()));
 
       //  Toast.makeText(context, msgStr, Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(context, AlarmReceiverActivity.class);
+        Intent i = new Intent(context, AlarmActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
         //Intent service = new Intent(context, SimpleWakefulService.class);

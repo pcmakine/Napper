@@ -2,7 +2,6 @@ package com.nwodhcout.napper.app.activities;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
@@ -17,17 +16,15 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.nwodhcout.napper.app.AlarmManager;
+import com.nwodhcout.napper.app.NapAlarmManager;
 import com.nwodhcout.napper.app.Common;
 import com.nwodhcout.napper.app.R;
-import com.nwodhcout.napper.app.WakeLocker;
 
 import java.io.IOException;
 import java.util.Calendar;
 
-public class AlarmReceiverActivity extends Activity {
+public class AlarmActivity extends Activity {
     private MediaPlayer mMediaPlayer;
     private static final int ALARMEXPIRATION = 120; // seconds
     private CountDownTimer timer;
@@ -78,12 +75,15 @@ public class AlarmReceiverActivity extends Activity {
 
     //http://stackoverflow.com/questions/11823259/using-flag-show-when-locked-with-disablekeyguard-in-secured-android-lock-scree
     private void setWindowFlags(){
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN |
+        Window window = this.getWindow();
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN |
                         WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
                         WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN |
                         WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
-                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+        );
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     private void playSound(Context context, Uri alert) {
@@ -145,11 +145,10 @@ public class AlarmReceiverActivity extends Activity {
 
     private void cleanUp(){
         releaseMediaPlayer();
-        AlarmManager.removeAlarmFromFile(this);
+        NapAlarmManager.removeAlarmFromFile(this);
         if(timer != null){
             timer.cancel();
         }
-        WakeLocker.release();
     }
 
     @Override

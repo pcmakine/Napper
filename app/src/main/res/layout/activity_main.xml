@@ -1,22 +1,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    style = "@style/rootLayout"
     android:background="@drawable/background_opacity"
-    tools:context="com.nwodhcout.napper.app.activities.MainActivity">
+    tools:context="com.nwodhcout.napper.app.activities.SetNapActivity">
     <Button
         android:id="@+id/alarmNotification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style = "@style/bottomButton"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textSize = "15sp"
-        android:background="@android:color/transparent"
-        android:textColor = "#ffffff"
         android:onClick="showOngoingAlarm"
         />
 
@@ -29,15 +21,7 @@
 
         <Button
             android:id="@+id/napButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize = "30sp"
-            android:fontFamily="sans-serif-light"
-            android:textStyle="normal"
-            android:textColor="#864C9E"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/buttonbg"
-
+            style="@style/centerButton"
             android:text="@string/take_nap"
             android:onClick="nap"
             />
@@ -50,52 +34,35 @@
         >
         <Button
             android:id="@+id/customMin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/bottomButton"
             android:text="@string/custom"
-            android:textSize = "25sp"
-            android:singleLine="true"
-            android:textColor = "#ffffff"
-            android:fontFamily="sans-serif-light"
             android:layout_alignParentRight="true"
-            android:background="@android:color/transparent"
             android:onClick="changeNapTime"
             />
         <Button
             android:id="@+id/twentyMin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style = "@style/bottomButton"
             android:text="20"
-            android:textSize = "25sp"
-            android:fontFamily="sans-serif-light"
             android:layout_alignParentLeft="true"
-            android:textColor = "#ffffff"
-            android:background="@android:color/transparent"
             android:onClick="changeNapTime"
             />
         <Button
             android:id="@+id/sixtyMin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style = "@style/bottomButton"
             android:text="60"
-            android:textSize = "25sp"
-            android:fontFamily="sans-serif-light"
-            android:textColor = "#ffffff"
             android:layout_centerHorizontal="true"
-            android:background="@android:color/transparent"
             android:onClick="changeNapTime"
             />
 
-        <com.nwodhcout.napper.app.MySeekBar
+        <com.nwodhcout.napper.app.uicomponents.MySeekBar
             android:id="@+id/seekBar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/twentyMin"
-            android:secondaryProgress="120"
             android:progress = "20"
-            android:max = "120"
             android:visibility = "invisible"
             />
+
     </RelativeLayout>
 
 </RelativeLayout>
