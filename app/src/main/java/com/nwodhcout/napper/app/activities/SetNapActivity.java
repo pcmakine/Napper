@@ -59,7 +59,7 @@ public class SetNapActivity extends Activity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                int napTime = seekBar.getProgress() + MIN_NAP_TIME;
+                int napTime = seekBar.getProgress();
                 setNapTimeAndCustomText(napTime);
             }
             @Override
@@ -85,7 +85,7 @@ public class SetNapActivity extends Activity {
 
 
     public void setNapTimeAndCustomText(int time){
-        this.napTime = time;
+        this.napTime = time + MIN_NAP_TIME;
         customTime.setText(napTime + "");
 }
 
@@ -117,8 +117,7 @@ public class SetNapActivity extends Activity {
                 seekBar.setVisibility(View.INVISIBLE);
                 break;
             case R.id.customMin:
-                this.napTime = seekBar.getProgress();
-                customTime.setText(napTime + "");
+                setNapTimeAndCustomText(seekBar.getProgress());
                 seekBar.setVisibility(View.VISIBLE);
                 break;
         }
@@ -131,7 +130,7 @@ public class SetNapActivity extends Activity {
             napAlarmManager.cancelAlarm(this);
         }
         long startTime = System.currentTimeMillis();
-        int napSecs = napTime;
+        int napSecs = napTime*60;
         Alarm al = new Alarm(startTime, napSecs);
         setAlarm(al);
         intent.putExtra("NAP_TIME", napSecs);
