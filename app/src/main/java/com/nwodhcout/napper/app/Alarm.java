@@ -1,7 +1,5 @@
 package com.nwodhcout.napper.app;
 
-import java.io.Serializable;
-
 /**
  * Created by Pete on 10.7.2014.
  */

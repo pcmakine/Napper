@@ -22,7 +22,6 @@ import com.nwodhcout.napper.app.Common;
 import com.nwodhcout.napper.app.R;
 
 import java.io.IOException;
-import java.util.Calendar;
 
 public class AlarmActivity extends Activity {
     private MediaPlayer mMediaPlayer;
@@ -32,10 +31,7 @@ public class AlarmActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Calendar c = Calendar.getInstance();
-        Common.debugTime(c.getTimeInMillis(), "Alarmtime: ", "alarm receiver activity started at: ");
 
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setWindowFlags();
@@ -44,7 +40,6 @@ public class AlarmActivity extends Activity {
         Button stopAlarm = (Button) findViewById(R.id.stop);
         stopAlarm.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View arg0, MotionEvent arg1) {
-                releaseMediaPlayer();
                 onBackPressed();
                 return false;
             }
@@ -52,7 +47,6 @@ public class AlarmActivity extends Activity {
         playSound(this, getAlarmUri());
         setAlarmExpiration();
         setAnimation();
-
     }
 
     private void setAnimation(){

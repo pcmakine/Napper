@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<string name="take_nap">Ota torkut</string>
-<string name="custom">Oma</string>
-<string name="stop">Lopeta</string>
-<string name= "cancel_alarm">Peruuta herätys</string>
-<string name="alarm_set_feedback">Torkku asetettu: </string>
+    <string name="take_nap">Ota päiväunet</string>
+    <string name="custom">Oma</string>
+    <string name="stop">Lopeta</string>
+    <string name= "cancel_alarm">Peruuta herätys</string>
+    <string name="alarm_set_feedback">Torkku asetettu: </string>
+
+    <string name="napping">Päiväunilla...</string>
+    <string name="alarm_notification">Herätys asetettu. Tarkastele näpäyttämällä.</string>
+    <string name= "alarm_cancelled">Herätys peruutettu</string>
+    <string name="alarm_stop">Herätys</string>
+    <string name="alarm_tap">Lopeta näpäyttämällä</string>
+
+
 </resources>

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style = "@style/rootLayout"
     tools:context="com.nwodhcout.napper.app.activities.NapCounterActivity"
-    android:background="@drawable/background_opacity2">
+    android:background="@drawable/background2">
 
 
     <RelativeLayout

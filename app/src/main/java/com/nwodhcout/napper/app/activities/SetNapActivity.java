@@ -3,7 +3,6 @@ package com.nwodhcout.napper.app.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -21,7 +20,7 @@ import com.nwodhcout.napper.app.R;
 public class SetNapActivity extends Activity {
     private static final int DEFAULTNAPTIME = 20; //min
     private static final int MAX_NAP_TIME  = 120; //minutes
-    private static final int MIN_NAP_TIME = 5;
+    private static final int MIN_NAP_TIME = 2;
     private int napTime;
     private Button customTime;
     private MySeekBar seekBar;
@@ -71,13 +70,11 @@ public class SetNapActivity extends Activity {
 
             }
         });
-        seekBar.getProgressDrawable().setColorFilter(ButtonColorManager.getNormalColor(), PorterDuff.Mode.SRC_IN);
-        seekBar.getSeekBarThumb().setColorFilter(ButtonColorManager.getActivatedColor(), PorterDuff.Mode.SRC_IN);
     }
 
     private void activateButton(Button btn){
         btnManager.activateButton(btn);
-        if(btn != (Button) findViewById(R.id.customMin)){
+        if(btn != findViewById(R.id.customMin)){
             setDefaultTextToCustomButton();
         }
     }
@@ -95,7 +92,7 @@ public class SetNapActivity extends Activity {
     //Called when the blinking text is tapped
     public void showOngoingAlarm(View view){
         Intent intent = new Intent(this, NapCounterActivity.class);
-        int elapsedSecs = (int) (Common.msToSec(System.currentTimeMillis() - alarm.getStartTime()));
+        int elapsedSecs = (Common.msToSec(System.currentTimeMillis() - alarm.getStartTime()));
         int napLeft = (int) alarm.getNapTime() - elapsedSecs;
         if(napLeft > 0){
             intent.putExtra("NAP_TIME", napLeft);

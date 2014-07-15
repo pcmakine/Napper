@@ -11,12 +11,15 @@ import com.nwodhcout.napper.app.activities.AlarmActivity;
  * Created by Pete on 8.7.2014.
  */
 public class AlarmBroadcastReceiver extends BroadcastReceiver {
-    final public static String ONE_TIME = "onetime";
+    //final public static String ONE_TIME = "onetime";
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Intent i = new Intent(context, AlarmActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);
         //You can do the processing here.
-        Bundle extras = intent.getExtras();
+/*        Bundle extras = intent.getExtras();
         StringBuilder msgStr = new StringBuilder();
 
         if(extras != null && extras.getBoolean(ONE_TIME, Boolean.FALSE)){
@@ -25,10 +28,8 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
         }
         msgStr.append(Common.getSimpleDate(System.currentTimeMillis()));
 
-      //  Toast.makeText(context, msgStr, Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(context, AlarmActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(i);
+        Toast.makeText(context, msgStr, Toast.LENGTH_SHORT).show();*/
+
         //Intent service = new Intent(context, SimpleWakefulService.class);
     }
 

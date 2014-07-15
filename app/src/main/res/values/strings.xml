@@ -2,10 +2,9 @@
 <resources>
 
     <string name="app_name">Napper</string>
-    <string name="hello_world">Hello world!! 16:29</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_nap_feedback">NapFeedback</string>
-    <string name="title_activity_alarm_receiver">AlarmReceiverActivity</string>
+    <string name="title_activity_nap_feedback">NapCounterActivity</string>
+    <string name="title_activity_alarm_receiver">AlarmActivity</string>
 
     <string name="take_nap">Take a Nap</string>
     <string name="napping">Napping...</string>

@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style = "@style/rootLayout"
-    android:background="@drawable/background_opacity"
+    android:background="@drawable/background1"
     tools:context="com.nwodhcout.napper.app.activities.SetNapActivity">
     <Button
         android:id="@+id/alarmNotification"

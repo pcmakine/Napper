@@ -1,7 +1,7 @@
 package com.nwodhcout.napper.app.activities;
 
+import android.app.Activity;
 import android.content.Context;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -10,7 +10,7 @@ import com.nwodhcout.napper.app.NapAlarmManager;
 import com.nwodhcout.napper.app.R;
 import com.nwodhcout.napper.app.uicomponents.AnimatedCountDown;
 
-public class NapCounterActivity extends ActionBarActivity {
+public class NapCounterActivity extends Activity {
     private NapAlarmManager alarm;
     private int napTime; //naptime in seconds
     private AnimatedCountDown timer;
@@ -37,10 +37,10 @@ public class NapCounterActivity extends ActionBarActivity {
     @Override
     public void onStart(){
         super.onStart();
-        //we don't want the user to see this screen if there is no alarm to count down for
+/*        //we don't want the user to see this screen if there is no alarm to count down for
         if(NapAlarmManager.retrieveAlarm(this) == null){
             finish();
-        }
+        }*/
     }
 
     private void startTimerUpdates(){

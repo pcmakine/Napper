@@ -39,7 +39,7 @@ public class NapAlarmManager {
     }
 
     public static void saveAlarm(Context context, Alarm alarm){
-        SharedPreferences.Editor editor = context.getSharedPreferences("alarmsave", context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences("alarmsave", Context.MODE_PRIVATE).edit();
         editor.putBoolean("alarmSet",true);
         editor.putLong("napTime", alarm.getNapTime());
         editor.putLong("startTime", alarm.getStartTime());
@@ -51,12 +51,11 @@ public class NapAlarmManager {
         if(!prefs.getBoolean("alarmSet", false)){
             return null;
         }
-        Alarm alarm = new Alarm(prefs.getLong("startTime", -1), prefs.getLong("napTime", -1));
-        return alarm;
+        return new Alarm(prefs.getLong("startTime", -1), prefs.getLong("napTime", -1));
     }
 
     public static void removeAlarmFromFile(Context context){
-        SharedPreferences.Editor editor = context.getSharedPreferences("alarmsave", context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences("alarmsave", Context.MODE_PRIVATE).edit();
         editor.putBoolean("alarmSet",false);
         editor.commit();
     }

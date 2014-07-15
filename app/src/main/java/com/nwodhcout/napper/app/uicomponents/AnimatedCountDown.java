@@ -26,8 +26,8 @@ public class AnimatedCountDown implements Runnable {
 
     public AnimatedCountDown(int napTime, Activity activity){
         this.napTime = napTime;
-        switchers = new ArrayList();
-        currentVals = new ArrayList();
+        switchers = new ArrayList<TextSwitcher>();
+        currentVals = new ArrayList<Integer>();
         setUpSwitchers(activity);
         this.mHandler = new Handler();
     }
@@ -57,12 +57,11 @@ public class AnimatedCountDown implements Runnable {
 
     private int timeLeft(){
         long elapseTime = System.currentTimeMillis() - mStartTime;
-        int secondsLeft = napTime - (int) (elapseTime/1000);
-        return secondsLeft;
+        return napTime - (int) (elapseTime/1000);
     }
 
     private int firstDigit(int val){
-        return (int) (val/10);
+        return (val/10);
     }
 
     private int secondDigit(int val){
@@ -70,8 +69,7 @@ public class AnimatedCountDown implements Runnable {
     }
 
     private void prepareAnimation(final Context ctx){
-        for(int i = 0; i< switchers.size(); i++){
-            TextSwitcher switcher = switchers.get(i);
+        for (TextSwitcher switcher : switchers) {
             currentVals.add(-10);
             if (switcher.getChildCount() != 2) {
                 switcher.removeAllViews();
@@ -88,16 +86,8 @@ public class AnimatedCountDown implements Runnable {
 
     }
 
-    public long getmStartTime(){
-        return this.mStartTime;
-    }
-
     public void cancel(){
         mHandler.removeCallbacks(this);
-    }
-
-    public int getNapTime(){
-        return this.napTime;
     }
 
     public void run() {

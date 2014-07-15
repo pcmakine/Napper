@@ -1,9 +1,5 @@
 package com.nwodhcout.napper.app.activities;
 
-/**
- * Created by Pete on 14.7.2014.
- */
-
 import android.graphics.Color;
 import android.widget.Button;
 
