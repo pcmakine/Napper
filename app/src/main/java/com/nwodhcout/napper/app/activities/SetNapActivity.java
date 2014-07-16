@@ -160,10 +160,12 @@ public class SetNapActivity extends Activity {
             btn.setText("");
         }
         btnManager.resumeButtonState();
+        resumeNapTime();
     }
 
     private void resumeNapTime(){
-
+        Button btn = btnManager.getActivatedButton();
+        btn.performClick();
     }
 
     @Override

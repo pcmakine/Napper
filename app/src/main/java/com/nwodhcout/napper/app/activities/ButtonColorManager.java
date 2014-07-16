@@ -40,6 +40,10 @@ public class ButtonColorManager {
         }
     }
 
+    public Button getActivatedButton(){
+        return activatedButton;
+    }
+
     public static int getActivatedColor(){
         return ACTIVATED_COLOR;
     }
