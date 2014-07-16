@@ -31,7 +31,7 @@ public class SetNapActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.napTime = DEFAULTNAPTIME;
+   //     this.napTime = DEFAULTNAPTIME;
         setContentView(R.layout.activity_main);
         this.customTime = (Button) findViewById(R.id.customMin);
         this.seekBar = (MySeekBar) findViewById(R.id.seekBar);
@@ -160,6 +160,10 @@ public class SetNapActivity extends Activity {
             btn.setText("");
         }
         btnManager.resumeButtonState();
+    }
+
+    private void resumeNapTime(){
+
     }
 
     @Override
