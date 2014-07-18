@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.nwodhcout.napper.app.Alarm;
 import com.nwodhcout.napper.app.NapAlarmManager;
 import com.nwodhcout.napper.app.Common;
@@ -31,8 +33,12 @@ public class SetNapActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-   //     this.napTime = DEFAULTNAPTIME;
         setContentView(R.layout.activity_main);
+
+
+
+        //   this.napTime = DEFAULTNAPTIME;
+        requestAds();
         this.customTime = (Button) findViewById(R.id.customMin);
         this.seekBar = (MySeekBar) findViewById(R.id.seekBar);
         this.napAlarmManager = new NapAlarmManager();
@@ -45,6 +51,18 @@ public class SetNapActivity extends Activity {
         setBlinkingTextAnimation();
 
         prepareSeekBar();
+    }
+
+    private void requestAds(){
+        AdView adView = (AdView) this.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().
+                addTestDevice("CAA8F5A6A3765BFB3C23E402831649C9").
+                build();
+        adView.loadAd(adRequest);
+    }
+
+    private void checkForGooglePlayServicesAvailability(){
+
     }
 
     private void setBlinkingTextAnimation(){
