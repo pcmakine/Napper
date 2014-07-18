@@ -2,17 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     style = "@style/rootLayout"
+    android:paddingBottom="0dp"
     android:background="@drawable/background1"
     tools:context="com.nwodhcout.napper.app.activities.SetNapActivity">
-    <com.google.android.gms.ads.AdView android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        ads:adUnitId="ca-app-pub-1355960601271448/7556112011"
-        ads:adSize="BANNER"/>
+
+
     <Button
         android:id="@+id/alarmNotification"
         style = "@style/bottomButton"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentTop = "true"
         android:layout_centerHorizontal="true"
         android:textSize = "15sp"
         android:onClick="showOngoingAlarm"
@@ -28,9 +26,28 @@
         <Button
             android:id="@+id/napButton"
             style="@style/centerButton"
-            android:text="@string/take_nap"
             android:onClick="nap"
             />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation = "vertical"
+            android:layout_centerInParent="true">
+            <TextView
+                android:id = "@+id/napText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/bigText"
+                android:layout_gravity = "center_horizontal"
+                android:text="@string/take_nap"/>
+            <TextView
+                android:id ="@+id/napTimeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/mediumText"
+                android:textSize = "20sp"
+                android:layout_gravity = "center_horizontal"/>
+        </LinearLayout>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -48,14 +65,14 @@
         <Button
             android:id="@+id/twentyMin"
             style = "@style/bottomButton"
-            android:text="20"
+            android:text="20m"
             android:layout_alignParentLeft="true"
             android:onClick="changeNapTime"
             />
         <Button
             android:id="@+id/sixtyMin"
             style = "@style/bottomButton"
-            android:text="60"
+            android:text="1h"
             android:layout_centerHorizontal="true"
             android:onClick="changeNapTime"
             />
@@ -68,8 +85,14 @@
             android:progress = "20"
             android:visibility = "invisible"
             />
+                <com.google.android.gms.ads.AdView android:id="@+id/adView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal = "true"
+                    android:layout_alignParentBottom = "true"
+                    ads:adUnitId="ca-app-pub-1355960601271448/7556112011"
+                    ads:adSize="BANNER"/>
 
     </RelativeLayout>
-
 
 </RelativeLayout>

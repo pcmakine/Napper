@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
@@ -29,18 +30,19 @@ public class SetNapActivity extends Activity {
     private Alarm alarm;
     private NapAlarmManager napAlarmManager;
     private ButtonColorManager btnManager;
+    private TextView napTimeText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_set_nap);
 
 
         //   this.napTime = DEFAULTNAPTIME;
         requestAds();
         this.customTime = (Button) findViewById(R.id.customMin);
         this.seekBar = (MySeekBar) findViewById(R.id.seekBar);
+        this.napTimeText = (TextView) findViewById(R.id.napTimeText);
         this.napAlarmManager = new NapAlarmManager();
         Button[] buttons = new Button[3];
         buttons[0] = (Button) findViewById(R.id.twentyMin);
@@ -80,6 +82,7 @@ public class SetNapActivity extends Activity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 int napTime = seekBar.getProgress();
                 setNapTimeAndCustomText(napTime);
+                setNapTimeText();
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -105,7 +108,8 @@ public class SetNapActivity extends Activity {
 
     public void setNapTimeAndCustomText(int time){
         this.napTime = time + MIN_NAP_TIME;
-        customTime.setText(napTime + "");
+       // customTime.setText(napTime + "");
+        customTime.setText(Common.timeToString(napTime));
 }
 
     //Called when the blinking text is tapped
@@ -140,6 +144,11 @@ public class SetNapActivity extends Activity {
                 seekBar.setVisibility(View.VISIBLE);
                 break;
         }
+        setNapTimeText();
+    }
+
+    private void setNapTimeText(){
+        this.napTimeText.setText("Set nap for " + Common.timeToString(napTime));
     }
 
     //called when the big nap button is tapped
