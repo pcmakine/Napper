@@ -55,6 +55,7 @@ public class SetNapActivity extends Activity {
 
     private void prepareSeekBar(){
         seekBar.setMax(MAX_NAP_TIME - MIN_NAP_TIME);
+        seekBar.setProgress(DEFAULTNAPTIME - MIN_NAP_TIME);
         seekBar.setSecondaryProgress(seekBar.getMax());
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

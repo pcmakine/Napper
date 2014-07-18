@@ -16,7 +16,7 @@
         <activity
             android:name=".activities.SetNapActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
+            android:screenOrientation="sensorPortrait"
             android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
         <activity
             android:name=".activities.NapCounterActivity"
             android:label="@string/title_activity_nap_feedback"
-            android:screenOrientation="portrait"
+            android:screenOrientation="sensorPortrait"
             android:configChanges="orientation|keyboardHidden"
             android:noHistory="true"
             >
@@ -35,7 +35,7 @@
         <activity
             android:name=".activities.AlarmActivity"
             android:label="@string/title_activity_alarm_receiver"
-            android:screenOrientation="portrait"
+            android:screenOrientation="sensorPortrait"
             android:configChanges="orientation|keyboardHidden">
         </activity>
         <receiver android:name=".AlarmBroadcastReceiver">
