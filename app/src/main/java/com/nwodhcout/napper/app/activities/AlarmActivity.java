@@ -155,7 +155,7 @@ public class AlarmActivity extends Activity implements ButtonActivatorListener {
 
     private void cleanUp(){
         releaseMediaPlayer();
-        NapAlarmManager.removeAlarmFromFile(this);
+        NapAlarmManager.cancelAlarm(this);
         if(timer != null){
             timer.cancel();
         }
@@ -178,6 +178,5 @@ public class AlarmActivity extends Activity implements ButtonActivatorListener {
     public void onBackPressed(){
         super.onBackPressed();
         this.stoppedByUser = true;
-       // cleanUp();
     }
 }

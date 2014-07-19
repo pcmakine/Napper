@@ -61,7 +61,7 @@ public class ButtonActivator {
         }
 
     }
-    
+
     private static void clearFilters(Button btn, ArrayList<View> additionalViews){
         btn.getBackground().clearColorFilter();
         if(additionalViews != null) {

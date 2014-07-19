@@ -14,7 +14,9 @@ import com.nwodhcout.napper.app.activities.SetNapActivity;
  * Created by Pete on 19.7.2014.
  */
 public class NapNotification {
-   private static final int NOTIFICATION_ID = 1;
+    private static final int NOTIFICATION_ID = 1;
+    private static final int ledOnMs  = 200;
+    private static final int ledOffMs = 1000;
 
     public static void cancelNotification(Context ctx){
         if (Context.NOTIFICATION_SERVICE!=null) {
@@ -29,6 +31,7 @@ public class NapNotification {
         mBuilder.setContentTitle("Nap set");
         mBuilder.setContentText("Napping... sweet dreams");
         mBuilder.setOngoing(true);
+        mBuilder.setLights(0xff800080, 300, 1000);
 
         addAlarmActivityIntent(mBuilder, ctx);
 

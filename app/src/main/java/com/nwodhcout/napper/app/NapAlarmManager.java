@@ -28,7 +28,7 @@ public class NapAlarmManager {
     }
 
 
-    public void cancelAlarm(Context context)
+    public static void cancelAlarm(Context context)
     {
         context = context.getApplicationContext();
         Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
