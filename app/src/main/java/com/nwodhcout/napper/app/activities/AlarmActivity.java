@@ -2,6 +2,10 @@ package com.nwodhcout.napper.app.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
@@ -18,18 +22,22 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
+import com.nwodhcout.napper.app.ButtonActivator;
+import com.nwodhcout.napper.app.ButtonActivatorListener;
 import com.nwodhcout.napper.app.NapAlarmManager;
 import com.nwodhcout.napper.app.Common;
 import com.nwodhcout.napper.app.NapNotification;
 import com.nwodhcout.napper.app.R;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class AlarmActivity extends Activity {
+public class AlarmActivity extends Activity implements ButtonActivatorListener {
     private MediaPlayer mMediaPlayer;
     private static final int ALARMEXPIRATION = 120; // seconds
     private CountDownTimer timer;
     private boolean stoppedByUser;
+    private Button stopAlarm;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,17 +48,21 @@ public class AlarmActivity extends Activity {
         setWindowFlags();
         setContentView(R.layout.activity_alarm_receiver);
 
-        Button stopAlarm = (Button) findViewById(R.id.stop);
-        stopAlarm.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                onBackPressed();
-                return false;
-            }
-        });
+        stopAlarm = (Button) findViewById(R.id.stop);
+        ArrayList views = new ArrayList();
+        views.add(findViewById(R.id.rectangle));
+        views.add(findViewById(R.id.stopText));
+
+        ButtonActivator.setOnTouchListener(stopAlarm, this, views);
         playSound(this, getAlarmUri());
         setAlarmExpiration();
         setAnimation();
         NapNotification.cancelNotification(this);
+    }
+
+    public void handleButtonPress(View v){
+        cleanUp();
+        onBackPressed();
     }
 
     private void setAnimation(){

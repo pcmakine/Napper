@@ -4,8 +4,13 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -17,13 +22,17 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.nwodhcout.napper.app.Alarm;
+import com.nwodhcout.napper.app.ButtonActivator;
+import com.nwodhcout.napper.app.ButtonActivatorListener;
 import com.nwodhcout.napper.app.NapAlarmManager;
 import com.nwodhcout.napper.app.Common;
 import com.nwodhcout.napper.app.NapNotification;
 import com.nwodhcout.napper.app.uicomponents.MySeekBar;
 import com.nwodhcout.napper.app.R;
 
-public class SetNapActivity extends Activity {
+import java.util.ArrayList;
+
+public class SetNapActivity extends Activity implements ButtonActivatorListener {
     private static final int DEFAULTNAPTIME = 20; //min
     private static final int MAX_NAP_TIME  = 120; //minutes
     private static final int MIN_NAP_TIME = 2;
@@ -34,6 +43,7 @@ public class SetNapActivity extends Activity {
     private NapAlarmManager napAlarmManager;
     private ButtonColorManager btnManager;
     private TextView napTimeText;
+    private Button napButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +62,11 @@ public class SetNapActivity extends Activity {
         buttons[1] = (Button) findViewById(R.id.sixtyMin);
         buttons[2] = customTime;
         btnManager = new ButtonColorManager(buttons);
+
+        napButton = (Button) findViewById(R.id.napButton);
+        ArrayList views = new ArrayList();
+        views.add(findViewById(R.id.napTimeText));
+        ButtonActivator.setOnTouchListener(napButton, this, null);
 
         setBlinkingTextAnimation();
 
@@ -111,9 +126,9 @@ public class SetNapActivity extends Activity {
 
     public void setNapTimeAndCustomText(int time){
         this.napTime = time + MIN_NAP_TIME;
-       // customTime.setText(napTime + "");
+        // customTime.setText(napTime + "");
         customTime.setText(Common.timeToString(napTime));
-}
+    }
 
     //Called when the blinking text is tapped
     public void showOngoingAlarm(View view){
@@ -178,6 +193,10 @@ public class SetNapActivity extends Activity {
         }else{
             Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void handleButtonPress(View v){
+        nap(v);
     }
 
     @Override

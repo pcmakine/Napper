@@ -77,7 +77,7 @@ public class AnimatedCountDown implements Runnable {
                     @Override
                     public View makeView() {
                         TextView myText = new TextView(ctx);
-                        myText.setTextAppearance(ctx, R.style.mediumText);
+                        myText.setTextAppearance(ctx, R.style.smallText);
                         return myText;
                     }
                 });
