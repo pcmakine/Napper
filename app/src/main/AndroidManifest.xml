@@ -34,8 +34,12 @@
             android:label="@string/title_activity_nap_feedback"
             android:screenOrientation="sensorPortrait"
             android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".activities.SetNapActivity"
             android:noHistory="true"
             >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.SetNapActivity" />
         </activity>
         <activity
             android:name=".activities.AlarmActivity"

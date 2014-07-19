@@ -27,7 +27,7 @@ public class SetNapActivity extends Activity {
     private static final int DEFAULTNAPTIME = 20; //min
     private static final int MAX_NAP_TIME  = 120; //minutes
     private static final int MIN_NAP_TIME = 2;
-    private int napTime;
+    private int napTime; //min
     private Button customTime;
     private MySeekBar seekBar;
     private Alarm alarm;
