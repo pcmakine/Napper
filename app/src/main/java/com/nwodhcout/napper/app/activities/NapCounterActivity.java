@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.nwodhcout.napper.app.NapAlarmManager;
+import com.nwodhcout.napper.app.NapNotification;
 import com.nwodhcout.napper.app.R;
 import com.nwodhcout.napper.app.uicomponents.AnimatedCountDown;
 
@@ -57,8 +58,10 @@ public class NapCounterActivity extends Activity {
         }else{
             Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
         }
+        NapNotification.cancelNotification(this);
         this.onBackPressed();
     }
+
 
     @Override
     public void onBackPressed(){

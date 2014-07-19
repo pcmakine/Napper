@@ -1,9 +1,11 @@
 package com.nwodhcout.napper.app.activities;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -17,6 +19,7 @@ import com.google.android.gms.ads.AdView;
 import com.nwodhcout.napper.app.Alarm;
 import com.nwodhcout.napper.app.NapAlarmManager;
 import com.nwodhcout.napper.app.Common;
+import com.nwodhcout.napper.app.NapNotification;
 import com.nwodhcout.napper.app.uicomponents.MySeekBar;
 import com.nwodhcout.napper.app.R;
 
@@ -158,9 +161,11 @@ public class SetNapActivity extends Activity {
             napAlarmManager.cancelAlarm(this);
         }
         long startTime = System.currentTimeMillis();
-        int napSecs = napTime*60;
+        int napSecs = napTime;      // add * 60 to use minutes
         Alarm al = new Alarm(startTime, napSecs);
         setAlarm(al);
+        NapNotification.buildNotification(this);
+
         intent.putExtra("NAP_TIME", napSecs);
         intent.putExtra("NAP_START", startTime);
         startActivity(intent);

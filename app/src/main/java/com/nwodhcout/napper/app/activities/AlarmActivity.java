@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.PowerManager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -19,6 +20,7 @@ import android.widget.Button;
 
 import com.nwodhcout.napper.app.NapAlarmManager;
 import com.nwodhcout.napper.app.Common;
+import com.nwodhcout.napper.app.NapNotification;
 import com.nwodhcout.napper.app.R;
 
 import java.io.IOException;
@@ -27,6 +29,7 @@ public class AlarmActivity extends Activity {
     private MediaPlayer mMediaPlayer;
     private static final int ALARMEXPIRATION = 120; // seconds
     private CountDownTimer timer;
+    private boolean stoppedByUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class AlarmActivity extends Activity {
         playSound(this, getAlarmUri());
         setAlarmExpiration();
         setAnimation();
+        NapNotification.cancelNotification(this);
     }
 
     private void setAnimation(){
@@ -71,9 +75,11 @@ public class AlarmActivity extends Activity {
     private void setWindowFlags(){
         Window window = this.getWindow();
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN |
+                        WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
                         WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
                         WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN |
+                        WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
                         WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
                         WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
         );
@@ -127,14 +133,12 @@ public class AlarmActivity extends Activity {
     }
 
     @Override
-    public void onStop(){
-        super.onStop();
-        PowerManager powermanager = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
-        if (powermanager.isScreenOn()){
+    public void onPause(){
+        super.onPause();
+        if (stoppedByUser){
             cleanUp();
             finish();
         }
-
     }
 
     private void cleanUp(){
@@ -143,11 +147,25 @@ public class AlarmActivity extends Activity {
         if(timer != null){
             timer.cancel();
         }
+        NapNotification.cancelNotification(this);
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        this.stoppedByUser = false;
+    }
+
+    @Override
+    public void onUserLeaveHint(){
+        super.onUserLeaveHint();
+        this.stoppedByUser = true;
     }
 
     @Override
     public void onBackPressed(){
         super.onBackPressed();
-        cleanUp();
+        this.stoppedByUser = true;
+       // cleanUp();
     }
 }
