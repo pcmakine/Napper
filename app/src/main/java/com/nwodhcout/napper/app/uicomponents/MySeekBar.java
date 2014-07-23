@@ -6,7 +6,8 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.SeekBar;
 
-import com.nwodhcout.napper.app.activities.ButtonColorManager;
+import com.nwodhcout.napper.app.R;
+
 
 /**
  * Created by Pete on 9.7.2014.
@@ -28,8 +29,8 @@ public class MySeekBar extends SeekBar {
     }
 
     public void setColor(){
-        getProgressDrawable().setColorFilter(ButtonColorManager.getNormalColor(), PorterDuff.Mode.SRC_IN);
-        mThumb.setColorFilter(ButtonColorManager.getActivatedColor(), PorterDuff.Mode.SRC_IN);
+        getProgressDrawable().setColorFilter(getResources().getColor(R.color.ButtonNotChecked), PorterDuff.Mode.SRC_IN);
+        mThumb.setColorFilter(getResources().getColor(R.color.ButtonChecked), PorterDuff.Mode.SRC_IN);
     }
 
     @Override

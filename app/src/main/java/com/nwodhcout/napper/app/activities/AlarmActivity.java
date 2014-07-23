@@ -54,7 +54,7 @@ public class AlarmActivity extends Activity implements ButtonActivatorListener {
         ArrayList views = new ArrayList();
         views.add(findViewById(R.id.rectangle));
 
-        ButtonActivator.setOnTouchListener(stopAlarm, this, views);
+        new ButtonActivator(stopAlarm, this, views);
         playSound(this, getAlarmUri());
         setAlarmExpiration();
         setAnimation();

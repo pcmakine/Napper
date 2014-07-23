@@ -17,23 +17,28 @@ import java.util.ArrayList;
  */
 public class ButtonActivator {
     private static final PorterDuffColorFilter GRAY_FILTER = new PorterDuffColorFilter(Color.rgb(234, 234, 234), PorterDuff.Mode.MULTIPLY);
+    private Drawable bg;
+
+    public ButtonActivator(Button btn, final ButtonActivatorListener activity, final ArrayList<View> additionalViews){
+        this.bg = btn.getBackground();
+        setOnTouchListener(btn, activity, additionalViews);
+
+    }
 
     //todo implement some kind of button lock. Currently if the user clicks the button multiple times he can start many activities
-    public static void setOnTouchListener(final Button btn, final ButtonActivatorListener activity, final ArrayList<View> additionalViews){
+    public void setOnTouchListener(Button btn, final ButtonActivatorListener activity, final ArrayList<View> additionalViews){
         btn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Drawable bg = btn.getBackground();
                 Rect bounds = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
                 switch (event.getAction() ) {
                     case MotionEvent.ACTION_DOWN:
-                        setFilters(btn, additionalViews);
-                        // bg.setColorFilter(Color.rgb(205, 205, 205), PorterDuff.Mode.MULTIPLY);
+                        setFilters(additionalViews);
                         break;
 
                     case MotionEvent.ACTION_MOVE:
                         if(!bounds.contains(v.getLeft() + (int) event.getX(), v.getTop() + (int) event.getY())){
-                            clearFilters(btn, additionalViews);
+                            clearFilters(additionalViews);
                         }
                         break;
 
@@ -41,7 +46,7 @@ public class ButtonActivator {
                         if(bounds.contains(v.getLeft() + (int) event.getX(), v.getTop() + (int) event.getY())){
                             activity.handleButtonPress(v);
                         }
-                        clearFilters(btn, additionalViews);
+                        clearFilters(additionalViews);
                         break;
                 }
 
@@ -49,8 +54,8 @@ public class ButtonActivator {
             }});
     }
 
-    private static void setFilters(Button btn, ArrayList<View> additionalViews){
-        btn.getBackground().setColorFilter(GRAY_FILTER);
+    private void setFilters(ArrayList<View> additionalViews){
+        bg.setColorFilter(GRAY_FILTER);
         if(additionalViews != null){
             for(View v: additionalViews){
                 if(v instanceof TextView){
@@ -64,8 +69,8 @@ public class ButtonActivator {
 
     }
 
-    private static void clearFilters(Button btn, ArrayList<View> additionalViews){
-        btn.getBackground().clearColorFilter();
+    private void clearFilters(ArrayList<View> additionalViews){
+        bg.clearColorFilter();
         if(additionalViews != null) {
             for (View v : additionalViews) {
                 if(v instanceof TextView) {

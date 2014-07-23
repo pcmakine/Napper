@@ -5,7 +5,6 @@
     android:background="@drawable/background1"
     tools:context="com.nwodhcout.napper.app.activities.SetNapActivity">
 
-
     <Button
         android:id="@+id/alarmNotification"
         style = "@style/bottomButton"
@@ -47,29 +46,32 @@
                 android:layout_gravity = "center_horizontal"/>
         </LinearLayout>
     </RelativeLayout>
+
     <RelativeLayout
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/napButtonWrapper"
+        android:layout_alignLeft="@id/napButtonWrapper"
+        android:layout_alignRight="@id/napButtonWrapper"
         android:layout_alignParentRight="true"
         >
-        <Button
+        <RadioButton
             android:id="@+id/customMin"
-            style="@style/bottomButton"
+            style="@style/radioBtn"
             android:text="@string/custom"
             android:layout_alignParentRight="true"
             android:onClick="changeNapTime"
             />
-        <Button
+        <RadioButton
             android:id="@+id/twentyMin"
-            style = "@style/bottomButton"
+            style = "@style/radioBtn"
             android:text="20m"
             android:layout_alignParentLeft="true"
             android:onClick="changeNapTime"
             />
-        <Button
+        <RadioButton
             android:id="@+id/sixtyMin"
-            style = "@style/bottomButton"
+            style = "@style/radioBtn"
             android:text="1h"
             android:layout_centerHorizontal="true"
             android:onClick="changeNapTime"
@@ -83,13 +85,13 @@
             android:progress = "20"
             android:visibility = "invisible"
             />
-        <com.google.android.gms.ads.AdView android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal = "true"
-            android:layout_alignParentBottom = "true"
-            ads:adUnitId="ca-app-pub-1355960601271448/7556112011"
-            ads:adSize="BANNER"/>
+                <com.google.android.gms.ads.AdView android:id="@+id/adView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal = "true"
+                    android:layout_alignParentBottom = "true"
+                    ads:adUnitId="ca-app-pub-1355960601271448/7556112011"
+                    ads:adSize="BANNER"/>
 
     </RelativeLayout>
 
