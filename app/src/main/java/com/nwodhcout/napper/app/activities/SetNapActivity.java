@@ -194,12 +194,19 @@ public class SetNapActivity extends Activity implements ButtonActivatorListener 
     }
 
     public void handleButtonPress(View v){
+        enableNapButton(false);
         nap(v);
+    }
+
+    private void enableNapButton(boolean enable){
+        Button btn = (Button) findViewById(R.id.napButton);
+        btn.setEnabled(enable);
     }
 
     @Override
     public void onResume(){
         super.onResume();
+        enableNapButton(true);
         alarm = NapAlarmManager.retrieveAlarm(this);
         Button btn = (Button) findViewById(R.id.alarmNotification);
         if(alarm != null){
