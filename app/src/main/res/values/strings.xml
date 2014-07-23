@@ -17,6 +17,10 @@
     <string name="alarm_stop">Alarm</string>
     <string name="alarm_tap">Tap to stop</string>
 
+    <!--nap notification-->
+    <string name="nap_notification_text">Napping... sweet dreams</string>
+    <string name="nap_notification_title">Nap set</string>
+
 
 
 </resources>

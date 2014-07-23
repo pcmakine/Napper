@@ -28,8 +28,8 @@ public class NapNotification {
     public static void buildNotification(Context ctx){
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(ctx);
         mBuilder.setSmallIcon(R.drawable.ic_notification);
-        mBuilder.setContentTitle("Nap set");
-        mBuilder.setContentText("Napping... sweet dreams");
+        mBuilder.setContentTitle(ctx.getResources().getString(R.string.nap_notification_title));
+        mBuilder.setContentText(ctx.getResources().getString(R.string.nap_notification_text));
         mBuilder.setOngoing(true);
         mBuilder.setLights(LED_COLOR, LED_ON_MS, LED_OFF_MS);
 
