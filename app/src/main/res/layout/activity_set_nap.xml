@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     style = "@style/rootLayout"
-    android:paddingBottom="0dp"
     android:background="@drawable/background1"
     tools:context="com.nwodhcout.napper.app.activities.SetNapActivity">
 
@@ -84,13 +83,13 @@
             android:progress = "20"
             android:visibility = "invisible"
             />
-                <com.google.android.gms.ads.AdView android:id="@+id/adView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal = "true"
-                    android:layout_alignParentBottom = "true"
-                    ads:adUnitId="ca-app-pub-1355960601271448/7556112011"
-                    ads:adSize="BANNER"/>
+        <com.google.android.gms.ads.AdView android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal = "true"
+            android:layout_alignParentBottom = "true"
+            ads:adUnitId="ca-app-pub-1355960601271448/7556112011"
+            ads:adSize="BANNER"/>
 
     </RelativeLayout>
 

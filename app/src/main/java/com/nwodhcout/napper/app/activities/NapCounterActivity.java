@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.nwodhcout.napper.app.NapAlarmManager;
 import com.nwodhcout.napper.app.NapNotification;
 import com.nwodhcout.napper.app.R;
@@ -33,12 +35,21 @@ public class NapCounterActivity extends Activity {
         timer.start(startTime);
 
         startTimerUpdates();
+        requestAds();
+    }
+
+    private void requestAds(){
+        AdView adView = (AdView) this.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().
+                addTestDevice("CAA8F5A6A3765BFB3C23E402831649C9").
+                build();
+        adView.loadAd(adRequest);
     }
 
     @Override
     public void onStart(){
         super.onStart();
-/*        //we don't want the user to see this screen if there is no alarm to count down for
+/*        //we don't want the user to see this screen if there is no alarm to countdown for
         if(NapAlarmManager.retrieveAlarm(this) == null){
             finish();
         }*/

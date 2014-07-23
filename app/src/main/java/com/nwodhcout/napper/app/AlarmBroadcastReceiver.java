@@ -4,20 +4,29 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.WakefulBroadcastReceiver;
 
 import com.nwodhcout.napper.app.activities.AlarmActivity;
 
 /**
  * Created by Pete on 8.7.2014.
  */
-public class AlarmBroadcastReceiver extends BroadcastReceiver {
+public class AlarmBroadcastReceiver extends WakefulBroadcastReceiver {
+    private static final String LOG_TAG = AlarmBroadcastReceiver.class.getSimpleName();
     //final public static String ONE_TIME = "onetime";
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent i = new Intent(context, AlarmActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(i);
+        if("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())){
+            Intent rescheduleServiceIntent = new Intent(context, AlarmReSchedulerService.class);
+            startWakefulService(context, rescheduleServiceIntent);
+        }else{
+            NapNotification.cancelNotification(context);
+            Intent i = new Intent(context, AlarmActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(i);
+        }
+
         //You can do the processing here.
 /*        Bundle extras = intent.getExtras();
         StringBuilder msgStr = new StringBuilder();

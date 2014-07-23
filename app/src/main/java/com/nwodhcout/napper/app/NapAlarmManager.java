@@ -4,12 +4,14 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 /**
  * Created by Pete on 10.7.2014.
  */
 public class NapAlarmManager {
     final public static String ONE_TIME = "onetime";
+    private static final String LOG_TAG = AlarmBroadcastReceiver.class.getSimpleName();
 
     public void setOnetimeTimerSeconds(Context context, Alarm alarm){
         context = context.getApplicationContext();
@@ -51,7 +53,9 @@ public class NapAlarmManager {
         if(!prefs.getBoolean("alarmSet", false)){
             return null;
         }
-        return new Alarm(prefs.getLong("startTime", -1), prefs.getLong("napTime", -1));
+        Alarm alarm = new Alarm(prefs.getLong("startTime", -1), prefs.getLong("napTime", -1));
+        Log.d(LOG_TAG, "ALARM NAP TIME: " + alarm.getNapTime());
+        return alarm;
     }
 
     public static void removeAlarmFromFile(Context context){

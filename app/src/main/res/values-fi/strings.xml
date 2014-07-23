@@ -5,7 +5,6 @@
     <string name="title_activity_nap_feedback">NapCounterActivity</string>
     <string name="title_activity_alarm_receiver">AlarmActivity</string>
 
-    <string name="take_nap">Ota päiväunet</string>
     <string name="custom">Oma</string>
     <string name="stop">Lopeta</string>
     <string name= "cancel_alarm">Peruuta herätys</string>
@@ -16,5 +15,20 @@
     <string name= "alarm_cancelled">Herätys peruutettu</string>
     <string name="alarm_stop">Herätys</string>
     <string name="alarm_tap">Lopeta näpäyttämällä</string>
+
+
+
+
+    <!--nap notification-->
+    <string name="nap_notification_text">Päiväunilla... kauniita unia</string>
+    <string name="nap_notification_title">Herätys asetettu</string>
+
+    <!--nap missed notification-->
+    <string name="nap_missed_notification_text">Nap alarm missed</string>
+    <string name="nap_missed_notification_title">Nap missed</string>
+
+    <!--set nap screen-->
+    <string name="take_nap">Ota päiväunet</string>
+    <string name="alarm_info_prefix">""</string>
 
 </resources>

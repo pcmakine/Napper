@@ -1,16 +1,9 @@
 package com.nwodhcout.napper.app.activities;
 
 import android.app.Activity;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -52,7 +45,7 @@ public class SetNapActivity extends Activity implements ButtonActivatorListener 
 
 
         //   this.napTime = DEFAULTNAPTIME;
-        requestAds();
+
         this.customTime = (Button) findViewById(R.id.customMin);
         this.seekBar = (MySeekBar) findViewById(R.id.seekBar);
         this.napTimeText = (TextView) findViewById(R.id.napTimeText);
@@ -65,12 +58,13 @@ public class SetNapActivity extends Activity implements ButtonActivatorListener 
 
         napButton = (Button) findViewById(R.id.napButton);
         ArrayList views = new ArrayList();
-        views.add(findViewById(R.id.napTimeText));
+        views.add(napTimeText);
         ButtonActivator.setOnTouchListener(napButton, this, null);
 
         setBlinkingTextAnimation();
 
         prepareSeekBar();
+        requestAds();
     }
 
     private void requestAds(){
@@ -81,6 +75,7 @@ public class SetNapActivity extends Activity implements ButtonActivatorListener 
         adView.loadAd(adRequest);
     }
 
+    // todo add in v1.2
     private void checkForGooglePlayServicesAvailability(){
 
     }
@@ -166,7 +161,7 @@ public class SetNapActivity extends Activity implements ButtonActivatorListener 
     }
 
     private void setNapTimeText(){
-        this.napTimeText.setText("Set nap for " + Common.timeToString(napTime));
+        this.napTimeText.setText(getResources().getString(R.string.alarm_info_prefix) + Common.timeToString(napTime));
     }
 
     //called when the big nap button is tapped
@@ -176,10 +171,10 @@ public class SetNapActivity extends Activity implements ButtonActivatorListener 
             napAlarmManager.cancelAlarm(this);
         }
         long startTime = System.currentTimeMillis();
-        int napSecs = napTime;      // add * 60 to use minutes
+        int napSecs = napTime * 60;      // add * 60 to use minutes
         Alarm al = new Alarm(startTime, napSecs);
         setAlarm(al);
-        NapNotification.buildNotification(this);
+        NapNotification.buildNapSetNotification(this);
 
         intent.putExtra("NAP_TIME", napSecs);
         intent.putExtra("NAP_START", startTime);

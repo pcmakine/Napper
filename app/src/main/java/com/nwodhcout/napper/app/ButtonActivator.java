@@ -16,8 +16,9 @@ import java.util.ArrayList;
  * Created by Pete on 19.7.2014.
  */
 public class ButtonActivator {
-    private static final PorterDuffColorFilter GRAY_FILTER = new PorterDuffColorFilter(Color.LTGRAY, PorterDuff.Mode.MULTIPLY);
+    private static final PorterDuffColorFilter GRAY_FILTER = new PorterDuffColorFilter(Color.rgb(234, 234, 234), PorterDuff.Mode.MULTIPLY);
 
+    //todo implement some kind of button lock. Currently if the user clicks the button multiple times he can start many activities
     public static void setOnTouchListener(final Button btn, final ButtonActivatorListener activity, final ArrayList<View> additionalViews){
         btn.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -43,7 +44,8 @@ public class ButtonActivator {
                         clearFilters(btn, additionalViews);
                         break;
                 }
-                return true;
+
+                return false;
             }});
     }
 

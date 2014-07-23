@@ -25,13 +25,13 @@ public class NapNotification {
         }
     }
 
-    public static void buildNotification(Context ctx){
+    public static void buildNapSetNotification(Context ctx){
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(ctx);
         mBuilder.setSmallIcon(R.drawable.ic_notification);
         mBuilder.setContentTitle(ctx.getResources().getString(R.string.nap_notification_title));
         mBuilder.setContentText(ctx.getResources().getString(R.string.nap_notification_text));
         mBuilder.setOngoing(true);
-        mBuilder.setLights(LED_COLOR, LED_ON_MS, LED_OFF_MS);
+    //    mBuilder.setLights(LED_COLOR, LED_ON_MS, LED_OFF_MS);
 
         addAlarmActivityIntent(mBuilder, ctx);
 
@@ -69,6 +69,19 @@ public class NapNotification {
                 );
 
         mBuilder.setContentIntent(resultPendingIntent);
+    }
+
+    public static void buildNapMissedNotification(Context ctx){
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(ctx);
+        mBuilder.setSmallIcon(R.drawable.ic_notification);
+        mBuilder.setContentTitle(ctx.getResources().getString(R.string.nap_missed_notification_title));
+        mBuilder.setContentText(ctx.getResources().getString(R.string.nap_missed_notification_text));
+        mBuilder.setAutoCancel(true);
+        NotificationManager mNotificationManager =
+                (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // notificationID allows you to update the notification later on.
+        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
     }
 }
 

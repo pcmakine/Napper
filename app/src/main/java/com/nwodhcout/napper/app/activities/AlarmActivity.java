@@ -22,6 +22,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.nwodhcout.napper.app.ButtonActivator;
 import com.nwodhcout.napper.app.ButtonActivatorListener;
 import com.nwodhcout.napper.app.NapAlarmManager;
@@ -51,13 +53,20 @@ public class AlarmActivity extends Activity implements ButtonActivatorListener {
         stopAlarm = (Button) findViewById(R.id.stop);
         ArrayList views = new ArrayList();
         views.add(findViewById(R.id.rectangle));
-        views.add(findViewById(R.id.stopText));
 
         ButtonActivator.setOnTouchListener(stopAlarm, this, views);
         playSound(this, getAlarmUri());
         setAlarmExpiration();
         setAnimation();
-        NapNotification.cancelNotification(this);
+        requestAds();
+    }
+
+    private void requestAds(){
+        AdView adView = (AdView) this.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().
+                addTestDevice("CAA8F5A6A3765BFB3C23E402831649C9").
+                build();
+        adView.loadAd(adRequest);
     }
 
     public void handleButtonPress(View v){

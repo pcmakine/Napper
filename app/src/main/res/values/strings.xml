@@ -6,7 +6,6 @@
     <string name="title_activity_nap_feedback">NapCounterActivity</string>
     <string name="title_activity_alarm_receiver">AlarmActivity</string>
 
-    <string name="take_nap">Take a nap</string>
     <string name="napping">Napping...</string>
     <string name="custom">Custom</string>
     <string name="stop">Stop alarm</string>
@@ -21,6 +20,13 @@
     <string name="nap_notification_text">Napping... sweet dreams</string>
     <string name="nap_notification_title">Nap set</string>
 
+    <!--nap missed notification-->
+    <string name="nap_missed_notification_text">Nap alarm missed</string>
+    <string name="nap_missed_notification_title">Nap missed</string>
+
+    <!--set nap screen-->
+    <string name="take_nap">Take a nap</string>
+    <string name="alarm_info_prefix">"for "</string>
 
 
 </resources>
