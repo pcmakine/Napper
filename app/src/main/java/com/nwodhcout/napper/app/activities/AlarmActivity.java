@@ -65,6 +65,7 @@ public class AlarmActivity extends Activity implements ButtonActivatorListener {
         AdView adView = (AdView) this.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().
                 addTestDevice("CAA8F5A6A3765BFB3C23E402831649C9").
+                addTestDevice(AdRequest.DEVICE_ID_EMULATOR).
                 build();
         adView.loadAd(adRequest);
     }
